@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tool Nội Bộ — Shopee Express</title>
+<style>
+  :root{
+    --orange:#EE4D2D; --orange-lt:#FFF1EE; --orange-md:#FFDCD3;
+    --purple:#6F4CFF; --purple-lt:#F1EEFF;
+    --ink:#0F1222; --ink2:#3D4257; --ink3:#7A7F99; --ink4:#A7ABC2;
+    --line:#EBEDF5; --card:#FFFFFF; --bg:#F7F7FB; --radius:14px;
+    --shadow-sm:0 1px 2px rgba(15,18,34,.05),0 1px 1px rgba(15,18,34,.04);
+    --shadow-md:0 8px 24px rgba(15,18,34,.08);
+    --shadow-lg:0 20px 60px rgba(15,18,34,.18);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .hidden{display:none !important}
+
+  /* ── OVERLAY (login / pending) ── */
+  .overlay{position:fixed;inset:0;background:rgba(15,18,34,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:999}
+  .overlay-card{background:#fff;border-radius:20px;padding:44px 36px;text-align:center;width:380px;box-shadow:var(--shadow-lg)}
+  .overlay-mark{width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,var(--orange),#FF7A50);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:var(--shadow-sm)}
+  .overlay-card h2{font-size:18px;font-weight:800;margin-bottom:6px}
+  .overlay-card p{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-bottom:24px}
+  .btn-google{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:var(--shadow-sm);transition:.15s}
+  .btn-google:hover{box-shadow:var(--shadow-md)}
+  .pending-badge{display:inline-block;background:var(--purple-lt);color:var(--purple);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:16px}
+  .btn-outline-sm{border:1.5px solid var(--line);background:#fff;color:var(--ink2);border-radius:9px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .btn-outline-sm:hover{background:var(--bg)}
+
+  /* ── TOPBAR ── */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--orange),#FF7A50);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)}
+  .brand-text h1{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+  .brand-text p{font-size:11px;color:var(--ink3);margin-top:1px}
+  .brand-text p b{color:var(--orange);font-weight:700}
+  .header-right{display:flex;align-items:center;gap:10px}
+  .role-chip{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:100px;border:1.5px solid}
+  .role-chip.owner{color:#92400e;border-color:#fde68a;background:#fffbeb}
+  .role-chip.member{color:var(--purple);border-color:#DCD3FF;background:var(--purple-lt)}
+  .user-chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:5px 14px 5px 6px}
+  .user-chip .dot{width:26px;height:26px;border-radius:50%;background:var(--purple-lt);color:var(--purple);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+  .user-chip span{font-size:12.5px;color:var(--ink2);font-weight:500}
+  .icon-btn{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:.15s}
+  .icon-btn:hover{background:var(--bg);color:var(--ink)}
+
+  /* ── SEARCH / MAIN / GRID (giống bản trước) ── */
+  .search-wrap{max-width:900px;margin:34px auto 8px;padding:0 32px}
+  .search-box{position:relative;display:flex;align-items:center}
+  .search-box svg{position:absolute;left:18px;color:var(--ink4)}
+  .search-box input{width:100%;height:52px;border-radius:100px;border:1.5px solid var(--line);background:#fff;padding:0 20px 0 48px;font-size:14px;outline:none;transition:.15s;box-shadow:var(--shadow-sm)}
+  .search-box input:focus{border-color:var(--orange);box-shadow:0 0 0 4px var(--orange-lt)}
+  main{max-width:1180px;margin:0 auto;padding:20px 32px 64px}
+  .section{margin-top:34px}
+  .section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .section-bar{width:4px;height:20px;border-radius:3px;background:var(--purple)}
+  .section-head h2{font-size:15px;font-weight:800;color:var(--ink)}
+  .count-pill{font-size:11px;font-weight:700;color:var(--ink3);background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:3px 10px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .app-card{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;cursor:pointer;text-decoration:none;color:inherit;transition:.15s;position:relative}
+  .app-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:var(--orange-md)}
+  .app-card.disabled{cursor:not-allowed;opacity:.55}
+  .app-icon{width:42px;height:42px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:19px}
+  .app-name{font-size:13.5px;font-weight:700}
+  .app-sub{font-size:11.5px;color:var(--ink3);margin-top:2px}
+  .todo-badge{position:absolute;top:10px;right:10px;font-size:9px;font-weight:800;text-transform:uppercase;background:var(--purple-lt);color:var(--purple);padding:2px 8px;border-radius:100px}
+  @media (max-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+  @media (max-width:720px){.grid{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 16px}main{padding:16px 16px 48px}.search-wrap{padding:0 16px}}
+
+  /* ── ADMIN MODAL ── */
+  .modal{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center}
+  .modal-backdrop{position:absolute;inset:0;background:rgba(15,18,34,.5)}
+  .modal-box{position:relative;background:#fff;border-radius:16px;width:480px;max-width:92vw;max-height:82vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+  .modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}
+  .modal-header h3{font-size:15px;font-weight:800}
+  .modal-body{padding:20px 22px}
+  .modal-sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);margin:18px 0 10px}
+  .modal-sec-title:first-child{margin-top:0}
+  .access-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg);border:1px solid var(--line);border-radius:9px;margin-bottom:7px;font-size:12.5px}
+  .access-row .email{flex:1;color:var(--ink2)}
+  .btn-approve{background:#059669;color:#fff;border:none;border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer}
+  .btn-deny{background:#fff;color:var(--ink3);border:1px solid var(--line);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer}
+  .empty-mini{font-size:12px;color:var(--ink4);padding:6px 2px}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN OVERLAY ── -->
+<div id="loginOverlay" class="overlay hidden">
+  <div class="overlay-card">
+    <div class="overlay-mark">SPX</div>
+    <h2>Tool Nội Bộ</h2>
+    <p>Shopee Express · WFM AI Suite<br>Đăng nhập bằng tài khoản công ty để tiếp tục.</p>
+    <a href="/auth/google" class="btn-google">
+      <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/><path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"/><path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"/><path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/></svg>
+      Đăng nhập bằng Google
+    </a>
+  </div>
+</div>
+
+<!-- ── PENDING OVERLAY ── -->
+<div id="pendingOverlay" class="overlay hidden">
+  <div class="overlay-card">
+    <span class="pending-badge">Đang chờ duyệt</span>
+    <h2>Yêu cầu truy cập đã được gửi</h2>
+    <p>Tài khoản <strong id="pendingEmail"></strong> chưa được cấp quyền xem Portal. Vui lòng liên hệ Admin để được duyệt, hoặc bấm làm mới sau khi đã được cấp quyền.</p>
+    <button class="btn-outline-sm" onclick="location.reload()">🔄 Làm mới</button>
+  </div>
+</div>
+
+<!-- ── APP (chỉ hiện khi role = owner/member) ── -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">SPX</div>
+      <div class="brand-text">
+        <h1>Tool Nội Bộ</h1>
+        <p><b>Shopee Express</b> · WFM AI Suite</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span id="roleChip" class="role-chip"></span>
+      <div class="user-chip">
+        <div class="dot" id="userDot">?</div>
+        <span id="userLabel"></span>
+      </div>
+      <button id="adminBtn" class="icon-btn hidden" title="Quản lý truy cập" onclick="openAdmin()">⚙</button>
+      <a href="/auth/logout" class="icon-btn" title="Đăng xuất">⏻</a>
+    </div>
+  </header>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Tìm kiếm app..." oninput="filterApps(this.value)">
+    </div>
+  </div>
+
+  <main id="mainContent"></main>
+</div>
+
+<!-- ── ADMIN MODAL ── -->
+<div id="adminModal" class="modal hidden">
+  <div class="modal-backdrop" onclick="closeAdmin()"></div>
+  <div class="modal-box">
+    <div class="modal-header"><h3>Quản lý truy cập</h3><button class="icon-btn" onclick="closeAdmin()">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-sec-title">Yêu cầu chờ duyệt</div>
+      <div id="pendingList"></div>
+      <div class="modal-sec-title">Thành viên đã duyệt</div>
+      <div id="membersList"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATEGORIES = [
+  { name:'Shift Scheduling', apps:[
+    { name:'AI Shift Scheduling', sub:'Tối ưu hoá lịch trực & HC Order', icon:'🗓️', bg:'#FFF1EE', url:'https://shift-app-online.onrender.com' },
+  ]},
+  { name:'HC Planning', apps:[
+    { name:'AI Model Forecast',  sub:'Dự báo session volume', icon:'📈', bg:'#EEF3FF', url:'' },
+    { name:'HC Simulation Tool', sub:'Mô phỏng kịch bản headcount', icon:'🧮', bg:'#F1EEFF', url:'' },
+  ]},
+  { name:'AI Monitoring', apps:[
+    { name:'FC Accuracy Alert',     sub:'Cảnh báo độ lệch forecast', icon:'🎯', bg:'#FFF1EE', url:'' },
+    { name:'Predictive Modeling',   sub:'Mô hình dự đoán xu hướng', icon:'🔮', bg:'#EEF3FF', url:'' },
+    { name:'Fulfillment Alert',     sub:'Cảnh báo fulfillment bất thường', icon:'📦', bg:'#FFF7E6', url:'' },
+    { name:'Compliance Alert',      sub:'Cảnh báo tuân thủ quy trình', icon:'🛡️', bg:'#F1EEFF', url:'' },
+    { name:'Account-Invalid Alert', sub:'Cảnh báo tài khoản không hợp lệ', icon:'🚫', bg:'#FFF1EE', url:'' },
+  ]},
+  { name:'AI Chatbot', apps:[
+    { name:'WFM Agent', sub:'Trợ lý AI hỏi-đáp nghiệp vụ WFM', icon:'🤖', bg:'#EEF3FF', url:'' },
+  ]}
+];
+
+let ME = null;
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const res = await fetch('/api/me');
+  const { user, role } = await res.json();
+  ME = { user, role };
+
+  if (!user) {
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    return;
+  }
+  if (role === 'none') {
+    document.getElementById('pendingEmail').textContent = user.email;
+    document.getElementById('pendingOverlay').classList.remove('hidden');
+    return;
+  }
+
+  document.getElementById('app').classList.remove('hidden');
+  document.getElementById('userDot').textContent = (user.name || user.email).slice(0,2).toUpperCase();
+  document.getElementById('userLabel').textContent = user.email;
+  const chip = document.getElementById('roleChip');
+  chip.textContent = role.toUpperCase();
+  chip.className = `role-chip ${role}`;
+  if (role === 'owner') document.getElementById('adminBtn').classList.remove('hidden');
+
+  render();
+});
+
+const EXT_SVG = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;top:12px;right:12px;color:#A7ABC2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`;
+
+function render(filter=''){
+  const main = document.getElementById('mainContent');
+  const q = filter.trim().toLowerCase();
+  let html = '';
+  CATEGORIES.forEach(cat=>{
+    const apps = cat.apps.filter(a => !q || a.name.toLowerCase().includes(q) || a.sub.toLowerCase().includes(q));
+    if(!apps.length) return;
+    html += `<section class="section">
+      <div class="section-head"><span class="section-bar"></span><h2>${cat.name.toUpperCase()}</h2><span class="count-pill">${apps.length} Ứng Dụng</span></div>
+      <div class="grid">${apps.map(a=>{
+        const hasLink = a.url && a.url !== '#';
+        const tag = hasLink ? 'a' : 'div';
+        const attrs = hasLink ? `href="${a.url}" target="_blank" rel="noopener"` : '';
+        return `<${tag} class="app-card ${hasLink?'':'disabled'}" ${attrs}>
+          ${hasLink ? EXT_SVG : '<span class="todo-badge">Chưa gắn link</span>'}
+          <div class="app-icon" style="background:${a.bg}">${a.icon}</div>
+          <div><div class="app-name">${a.name}</div><div class="app-sub">${a.sub}</div></div>
+        </${tag}>`;
+      }).join('')}</div>
+    </section>`;
+  });
+  main.innerHTML = html;
+}
+function filterApps(v){ render(v); }
+
+// ── ADMIN ──
+function openAdmin(){ document.getElementById('adminModal').classList.remove('hidden'); loadAccess(); }
+function closeAdmin(){ document.getElementById('adminModal').classList.add('hidden'); }
+
+async function loadAccess(){
+  const res = await fetch('/api/access');
+  const { members, pending } = await res.json();
+
+  const pendingEl = document.getElementById('pendingList');
+  pendingEl.innerHTML = pending.length ? pending.map(e=>`
+    <div class="access-row"><span class="email">${e}</span>
+      <button class="btn-approve" onclick="approveAccess('${e}')">Duyệt</button>
+      <button class="btn-deny" onclick="denyAccess('${e}')">Từ chối</button>
+    </div>`).join('') : '<div class="empty-mini">Không có yêu cầu nào.</div>';
+
+  const membersEl = document.getElementById('membersList');
+  membersEl.innerHTML = members.length ? members.map(e=>`
+    <div class="access-row"><span class="email">${e}</span>
+      <button class="btn-deny" onclick="removeMember('${e}')">Gỡ quyền</button>
+    </div>`).join('') : '<div class="empty-mini">Chưa có thành viên nào.</div>';
+}
+
+async function approveAccess(email){
+  await fetch('/api/access/approve', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email }) });
+  loadAccess();
+}
+async function denyAccess(email){
+  await fetch(`/api/access/pending/${encodeURIComponent(email)}`, { method:'DELETE' });
+  loadAccess();
+}
+async function removeMember(email){
+  await fetch(`/api/access/members/${encodeURIComponent(email)}`, { method:'DELETE' });
+  loadAccess();
+}
+</script>
+</body>
+</html>
