@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tool Nội Bộ — Shopee Express</title>
+<title>WFM Internal Tool — Shopee</title>
 <style>
   :root{
     --orange:#EE4D2D; --orange-lt:#FFF1EE; --orange-md:#FFDCD3;
@@ -21,7 +21,8 @@
   /* ── OVERLAY (login / pending) ── */
   .overlay{position:fixed;inset:0;background:rgba(15,18,34,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:999}
   .overlay-card{background:#fff;border-radius:20px;padding:44px 36px;text-align:center;width:380px;box-shadow:var(--shadow-lg)}
-  .overlay-mark{width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,var(--orange),#FF7A50);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:var(--shadow-sm)}
+  .overlay-mark{width:64px;height:64px;border-radius:15px;background:var(--orange-lt);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:var(--shadow-sm);padding:9px}
+  .overlay-mark img{width:100%;height:100%;object-fit:contain}
   .overlay-card h2{font-size:18px;font-weight:800;margin-bottom:6px}
   .overlay-card p{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-bottom:24px}
   .btn-google{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:11px 22px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;box-shadow:var(--shadow-sm);transition:.15s}
@@ -33,7 +34,8 @@
   /* ── TOPBAR ── */
   .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--orange),#FF7A50);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)}
+  .brand-mark{width:40px;height:40px;border-radius:9px;background:var(--orange-lt);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);padding:6px}
+  .brand-mark img{width:100%;height:100%;object-fit:contain}
   .brand-text h1{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
   .brand-text p{font-size:11px;color:var(--ink3);margin-top:1px}
   .brand-text p b{color:var(--orange);font-weight:700}
@@ -91,9 +93,9 @@
 <!-- ── LOGIN OVERLAY ── -->
 <div id="loginOverlay" class="overlay hidden">
   <div class="overlay-card">
-    <div class="overlay-mark">SPX</div>
-    <h2>Tool Nội Bộ</h2>
-    <p>Shopee Express · WFM AI Suite<br>Đăng nhập bằng tài khoản công ty để tiếp tục.</p>
+    <div class="overlay-mark"><img src="/assets/logo-icon.png" alt="Shopee"></div>
+    <h2>WFM Internal Tool</h2>
+    <p>Shopee · WFM AI Suite<br>Đăng nhập bằng tài khoản công ty để tiếp tục.</p>
     <a href="/auth/google" class="btn-google">
       <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 002.38-5.88c0-.57-.05-.66-.15-1.18z"/><path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 01-7.18-2.54H1.83v2.07A8 8 0 008.98 17z"/><path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 010-3.04V5.41H1.83a8 8 0 000 7.18l2.67-2.07z"/><path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 001.83 5.4L4.5 7.49a4.77 4.77 0 014.48-3.3z"/></svg>
       Đăng nhập bằng Google
@@ -115,10 +117,10 @@
 <div id="app" class="hidden">
   <header class="topbar">
     <div class="brand">
-      <div class="brand-mark">SPX</div>
+      <div class="brand-mark"><img src="/assets/logo-icon.png" alt="Shopee"></div>
       <div class="brand-text">
-        <h1>Tool Nội Bộ</h1>
-        <p><b>Shopee Express</b> · WFM AI Suite</p>
+        <h1>WFM Internal Tool</h1>
+        <p><b>Shopee</b> · WFM AI Suite</p>
       </div>
     </div>
     <div class="header-right">
