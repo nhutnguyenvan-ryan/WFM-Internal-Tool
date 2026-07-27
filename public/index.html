@@ -17,11 +17,14 @@
         extend: {
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           colors: {
-            primary: { DEFAULT:'#EE4D2D', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#F5714F', 500:'#EE4D2D', 600:'#D8391A', 700:'#B22D14' },
-            secondary: { DEFAULT:'#6F4CFF', 50:'#F1EEFF', 100:'#E3DBFF', 500:'#6F4CFF', 600:'#5B37EA' },
-            ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
-            canvas: '#F9FAFB'
-          },
+          primary: { DEFAULT:'#EE4D2D', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#F5714F', 500:'#EE4D2D', 600:'#D8391A', 700:'#B22D14' },
+          secondary: { DEFAULT:'#6F4CFF', 50:'#F1EEFF', 100:'#E3DBFF', 500:'#6F4CFF', 600:'#5B37EA' },
+          mint: { 50:'#E1F7EC', 500:'#059669' },
+          sky: { 50:'#E7EEFF', 500:'#4361EE' },
+          amber: { 50:'#FEF3D9', 500:'#D97706' },
+          ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
+          canvas: '#F9FAFB'
+        },
           boxShadow: {
             soft: '0 1px 2px rgba(15,18,34,.05), 0 1px 1px rgba(15,18,34,.04)',
             card: '0 8px 24px rgba(15,18,34,.08)',
@@ -95,14 +98,14 @@ const CATEGORIES = [
     { name:'AI Shift Scheduling', sub:'Tối ưu hoá lịch trực & HC Order', icon:'🗓️', bg:'bg-primary-50', url:'https://shift-app-online.onrender.com' },
   ]},
   { name:'HC Planning', apps:[
-    { name:'AI Model Forecast',  sub:'Dự báo session volume', icon:'📈', bg:'bg-secondary-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
-    { name:'HC Simulation Tool', sub:'Mô phỏng kịch bản headcount', icon:'🧮', bg:'bg-secondary-50', url:'' },
+    { name:'AI Model Forecast',  sub:'Dự báo session volume', icon:'📈', bg:'bg-sky-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
+    { name:'HC Simulation Tool', sub:'Mô phỏng kịch bản headcount', icon:'🧮', bg:'bg-mint-50', url:'' },
   ]},
   { name:'AI Monitoring', apps:[
     { name:'FC Accuracy Alert',     sub:'Cảnh báo độ lệch forecast', icon:'🎯', bg:'bg-primary-50', url:'' },
-    { name:'Predictive Modeling',   sub:'Mô hình dự đoán xu hướng', icon:'🔮', bg:'bg-secondary-50', url:'' },
-    { name:'Fulfillment Alert',     sub:'Cảnh báo fulfillment bất thường', icon:'📦', bg:'bg-primary-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxUsjJbBJOYyZzvCcW1ZaqWnP61tTiy8jzxPp_UeI0t7g1nDXSc15THtP23Kuxuws3-/exec' },
-    { name:'Compliance Alert',      sub:'Cảnh báo tuân thủ quy trình', icon:'🛡️', bg:'bg-secondary-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxyqo2fiPEMXDdRuqA-zeDLz1MWVXDKrdLYx7oSYs_kZldAbEAB2ivBX4mJydvKhXID/exec' },
+    { name:'Predictive Modeling',   sub:'Mô hình dự đoán xu hướng', icon:'🔮', bg:'bg-sky-50', url:'' },
+    { name:'Fulfillment Alert',     sub:'Cảnh báo fulfillment bất thường', icon:'📦', bg:'bg-amber-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxUsjJbBJOYyZzvCcW1ZaqWnP61tTiy8jzxPp_UeI0t7g1nDXSc15THtP23Kuxuws3-/exec' },
+    { name:'Compliance Alert',      sub:'Cảnh báo tuân thủ quy trình', icon:'🛡️', bg:'bg-mint-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxyqo2fiPEMXDdRuqA-zeDLz1MWVXDKrdLYx7oSYs_kZldAbEAB2ivBX4mJydvKhXID/exec' },
     { name:'Account-Invalid Alert', sub:'Cảnh báo tài khoản không hợp lệ', icon:'🚫', bg:'bg-primary-50', url:'' },
   ]},
   { name:'AI Chatbot', apps:[
@@ -111,18 +114,18 @@ const CATEGORIES = [
 ];
 
 const FEATURES = [
-  { icon: <IconZap size={22} className="text-primary"/>, title:'Tối ưu hoá lịch trực bằng AI', desc:'Tính toán HC Order tối ưu theo Coverage Target, Spike Event và quy tắc PT→FT chỉ trong vài giây.' },
-  { icon: <IconTrend size={22} className="text-secondary-500"/>, title:'Dự báo Session Volume', desc:'Mô hình hybrid Weighted Moving Average + Event Pattern giúp dự báo lưu lượng sát thực tế.' },
-  { icon: <IconShield size={22} className="text-primary"/>, title:'Giám sát & Cảnh báo Real-time', desc:'Tự động phát hiện sai lệch forecast, fulfillment bất thường và vi phạm compliance.' },
+  { icon: <IconZap size={22} className="text-primary"/>, bg:'bg-primary-50', title:'Tối ưu hoá lịch trực bằng AI', desc:'Tính toán HC Order tối ưu theo Coverage Target, Spike Event và quy tắc PT→FT chỉ trong vài giây.' },
+  { icon: <IconTrend size={22} className="text-sky-500"/>, bg:'bg-sky-50', title:'Dự báo Session Volume', desc:'Mô hình hybrid Weighted Moving Average + Event Pattern giúp dự báo lưu lượng sát thực tế.' },
+  { icon: <IconShield size={22} className="text-mint-500"/>, bg:'bg-mint-50', title:'Giám sát & Cảnh báo Real-time', desc:'Tự động phát hiện sai lệch forecast, fulfillment bất thường và vi phạm compliance.' },
 ];
 
 const TESTIMONIALS = [
-  { name:'Minh T.', role:'Trưởng nhóm WFM', quote:'Giảm hơn 60% thời gian lên lịch trực thủ công. Số liệu HC Order chính xác hơn hẳn so với Excel trước đây.', rating:5 },
-  { name:'Thảo N.', role:'WFM Analyst', quote:'Cảnh báo Fulfillment Alert giúp team phát hiện bất thường sớm hơn nhiều so với quy trình cũ.', rating:5 },
-  { name:'Đức H.', role:'Operations Manager', quote:'Một nơi duy nhất cho toàn bộ công cụ WFM — không còn phải lục tìm link rải rác trong nhiều file.', rating:4 },
+  { name:'Ryan', role:'WFM Planning', quote:'Giảm hơn 80% thời gian lên lịch trực thủ công. Số liệu HC Order chính xác hơn hẳn so với Excel trước đây.', rating:5 },
+  { name:'Nhứt Ng.', role:'WFM Analyst', quote:'Cảnh báo Fulfillment Alert giúp team phát hiện bất thường sớm hơn nhiều so với quy trình cũ.', rating:5 },
+  { name:'Phát T.', role:'QA & WFM Manager', quote:'Một nơi duy nhất cho toàn bộ công cụ WFM — không còn phải lục tìm link rải rác trong nhiều file.', rating:4 },
 ];
 
-const SOCIAL_PROOF = ['Fulfillment', 'Compliance', 'Customer Service', 'Operations', 'Warehouse Ops'];
+const SOCIAL_PROOF = ['Workfore Management', 'LC Operations'];
 
 /* ═══════════════════════════════ NAVBAR ═══════════════════════════════ */
 function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
@@ -136,8 +139,8 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
     <header className="sticky top-0 z-50 bg-white/85 backdrop-blur border-b border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         <a href="#top" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-9 h-9 rounded-lg bg-primary-50 flex items-center justify-center shadow-soft">
-            <span className="text-primary font-black text-sm">S</span>
+          <div className="w-9 h-9 rounded-lg bg-primary-50 flex items-center justify-center shadow-soft p-1.5">
+            <img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain"/>
           </div>
           <div className="leading-tight">
             <div className="font-extrabold text-[15px] tracking-tight">WFM Internal Tool</div>
@@ -234,9 +237,9 @@ function Hero({ onPrimaryCTA }) {
             <div className="grid grid-cols-2 gap-3">
               {[
                 {icon:'🗓️', label:'Shift Scheduling', bg:'bg-primary-50'},
-                {icon:'📈', label:'HC Forecast', bg:'bg-secondary-50'},
-                {icon:'🛡️', label:'Compliance Alert', bg:'bg-secondary-50'},
-                {icon:'🤖', label:'WFM Agent', bg:'bg-primary-50'},
+                {icon:'📈', label:'HC Forecast', bg:'bg-sky-50'},
+                {icon:'🛡️', label:'Compliance Alert', bg:'bg-mint-50'},
+                {icon:'🤖', label:'WFM Agent', bg:'bg-amber-50'},
               ].map((c,i)=>(
                 <div key={i} className={`${c.bg} rounded-xl p-4 flex flex-col gap-2`}>
                   <span className="text-xl">{c.icon}</span>
@@ -248,7 +251,7 @@ function Hero({ onPrimaryCTA }) {
           <div className="absolute -bottom-6 -left-6 bg-white border border-ink/10 rounded-xl shadow-card px-4 py-3 flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-primary-50 flex items-center justify-center"><IconTrend size={16} className="text-primary"/></div>
             <div>
-              <div className="text-[15px] font-extrabold leading-none">−38%</div>
+              <div className="text-[15px] font-extrabold leading-none">−80%</div>
               <div className="text-[10px] text-ink-3 mt-0.5">Thời gian lên lịch</div>
             </div>
           </div>
@@ -286,7 +289,7 @@ function Features() {
       <div className="grid md:grid-cols-3 gap-6">
         {FEATURES.map((f, i) => (
           <div key={i} className="bg-white border border-ink/10 rounded-2xl p-7 hover:shadow-card hover:-translate-y-1 transition-all">
-            <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center mb-5">{f.icon}</div>
+            <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center mb-5`}>{f.icon}</div>
             <h3 className="font-bold text-[16px] mb-2">{f.title}</h3>
             <p className="text-[13.5px] text-ink-3 leading-relaxed">{f.desc}</p>
           </div>
@@ -455,7 +458,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center"><span className="text-primary font-black text-xs">S</span></div>
+            <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center p-1"><img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain"/></div>
             <span className="font-extrabold text-white text-[14px]">WFM Internal Tool</span>
           </div>
           <p className="text-[12.5px] leading-relaxed max-w-[220px]">Shopee WFM AI Suite — nền tảng nội bộ cho lập lịch, dự báo và giám sát vận hành contact center.</p>
