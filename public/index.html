@@ -127,8 +127,10 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ink/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3 shrink-0">
-          <LogoHeader />
+        <a href="#top" className="flex items-center gap-2.5 shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-primary-50 flex items-center justify-center shadow-soft p-1.5">
+            <img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain"/>
+          </div>
           <div className="leading-tight">
             <div className="font-extrabold text-[16px] tracking-tight text-ink">WFM Internal Tool</div>
             <div className="text-[11px] text-ink-3"><span className="text-[#FF6600] font-extrabold">Shopee</span> · WFM AI Suite</div>
@@ -464,8 +466,7 @@ function Footer() {
     <footer className="bg-[#113366] text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <LogoHeader />
+          <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center p-1"><img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain"/></div>
             <span className="font-extrabold text-white text-[17px]">WFM Internal Tool</span>
           </div>
           <p className="text-[13px] text-white/80 leading-relaxed max-w-[240px]">
