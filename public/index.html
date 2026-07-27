@@ -239,7 +239,7 @@ function Hero({ onPrimaryCTA }) {
           </div>
         </div>
 
-        {/* BOX NỔI HIỆU ỨNG FLOAT - ĐÃ BỔ SUNG ICON RÕ RÀNG */}
+        {/* BOX NỔI HIỆU ỨNG FLOAT */}
         <div className="relative">
           <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
             <div className="flex items-center justify-between border-b border-ink/5 pb-3 mb-5">
@@ -270,7 +270,7 @@ function Hero({ onPrimaryCTA }) {
               })}
             </div>
 
-            {/* BOX THỐNG KÊ - ĐÃ CÓ ICON NỔI BẬT */}
+            {/* BOX THỐNG KÊ */}
             <div className="mt-4 bg-shopee-light border border-shopee/20 rounded-xl p-3.5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-shopee flex items-center justify-center text-white shadow-sm">
@@ -295,7 +295,8 @@ function Features() {
   return (
     <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">Tính năng cốt lõi</span>
+        {/* CHỮ MÀU CAM "TÍNH NĂNG CỐT LÕI" */}
+        <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">TÍNH NĂNG CỐT LÕI</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Mọi thứ team WFM cần, trong một nơi</h2>
         <p className="mt-3 text-ink-3 text-[15px]">Từ lập lịch, dự báo đến giám sát — tự động hoá bằng AI, giảm sai sót thủ công.</p>
       </div>
@@ -332,7 +333,8 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
     <section id="dashboard" className="bg-canvas py-20 border-y border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">Dashboard</span>
+          {/* CHỮ MÀU CAM "DASHBOARD" */}
+          <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">DASHBOARD</span>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Truy cập công cụ ngay tại đây</h2>
           <p className="mt-3 text-ink-3 text-[15px]">Chỉ khả dụng cho tài khoản @shopee.com đã được cấp quyền.</p>
         </div>
@@ -380,6 +382,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               {filtered.map(cat => (
                 <div key={cat.name}>
                   <div className="flex items-center gap-2.5 mb-4">
+                    {/* VẠCH MÀU CAM Ở TÊN MỤC */}
                     <span className="w-1.5 h-5 rounded-sm bg-shopee"></span>
                     <h3 className="font-extrabold text-[14px] tracking-wide uppercase text-ink">{cat.name}</h3>
                     <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Ứng Dụng</span>
@@ -424,7 +427,8 @@ function Testimonials() {
   return (
     <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">Phản hồi nội bộ</span>
+        {/* CHỮ MÀU CAM "PHẢN HỒI NỘI BỘ" */}
+        <span className="inline-block text-[12px] font-bold tracking-widest text-shopee uppercase mb-3">PHẢN HỒI NỘI BỘ</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Đội ngũ WFM nói gì</h2>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
@@ -450,7 +454,7 @@ function Testimonials() {
   );
 }
 
-/* ═══════════════════════════════ CTA BANNER ═══════════════════════════════ */
+/* ═══════════════════════════════ CTA BANNER (BOX ĐĂNG NHẬP NGAY - MÀU CAM) ═══════════════════════════════ */
 function CTABanner({ onLogin }) {
   return (
     <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-16">
@@ -476,12 +480,12 @@ function CTABanner({ onLogin }) {
   );
 }
 
-/* ═══════════════════════════════ FOOTER MÀU #113366 CỤ THỂ ═══════════════════════════════ */
+/* ═══════════════════════════════ FOOTER MÀU #113366 RIÊNG BỆT ═══════════════════════════════ */
 function Footer() {
   const cols = [
-    { title:'Sản phẩm', links:[['Tính năng','#features'],['Dashboard','#dashboard'],['Đánh giá','#testimonials']] },
-    { title:'Tài nguyên', links:[['Hướng dẫn sử dụng','#'],['Yêu cầu hỗ trợ','#'],['Changelog','#']] },
-    { title:'Liên hệ', links:[['WFM Team','#'],['IT Helpdesk','#']] },
+    { title:'SẢN PHẨM', links:[['Tính năng','#features'],['Dashboard','#dashboard'],['Đánh giá','#testimonials']] },
+    { title:'TÀI NGUYÊN', links:[['Hướng dẫn sử dụng','#'],['Yêu cầu hỗ trợ','#'],['Changelog','#']] },
+    { title:'LIÊN HỆ', links:[['WFM Team','#'],['IT Helpdesk','#']] },
   ];
   return (
     <footer className="bg-[#113366] text-white">
