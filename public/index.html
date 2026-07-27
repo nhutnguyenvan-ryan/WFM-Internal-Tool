@@ -77,13 +77,13 @@ const IconSettings = (p) => <Icon {...p}><circle cx="12" cy="12" r="3"/><path d=
 const IconSearch = (p) => <Icon {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></Icon>;
 const IconSparkle = (p) => <Icon {...p}><path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/></Icon>;
 
-/* ═══════════════════════════════ LOGO BRANDING SHOPEE chuẩn ═══════════════════════════════ */
+/* ═══════════════════════════════ LOGO BRANDING LOCAL ═══════════════════════════════ */
 const LogoHeader = () => (
-  <div className="w-10 h-10 rounded-xl bg-shopee flex items-center justify-center p-2 shadow-sm shrink-0">
+  <div className="w-10 h-10 rounded-xl bg-shopee-light flex items-center justify-center overflow-hidden p-1 border border-shopee/20 shadow-sm shrink-0">
     <img 
-      src="https://upload.wikimedia.org/wikipedia/commons/fe/fe/Shopee.svg" 
-      alt="Shopee Logo" 
-      className="w-full h-full object-contain filter brightness-0 invert"
+      src="public/assets/logo-icon.png" 
+      alt="WFM Logo" 
+      className="w-full h-full object-contain"
     />
   </div>
 );
