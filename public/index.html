@@ -9,27 +9,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- Cấu hình biến tailwind trước khi load CDN để tránh cảnh báo production -->
 <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-        colors: {
-          primary: { DEFAULT:'#EE4D2D', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#F5714F', 500:'#EE4D2D', 600:'#D8391A', 700:'#B22D14' },
-          secondary: { DEFAULT:'#6F4CFF', 50:'#F1EEFF', 100:'#E3DBFF', 500:'#6F4CFF', 600:'#5B37EA' },
-          ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
-          canvas: '#F9FAFB'
-        },
-        boxShadow: {
-          soft: '0 1px 2px rgba(15,18,34,.05), 0 1px 1px rgba(15,18,34,.04)',
-          card: '0 8px 24px rgba(15,18,34,.08)',
-          lifted: '0 20px 60px rgba(15,18,34,.16)'
+  window.tailwind = {
+    config: {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            primary: { DEFAULT:'#EE4D2D', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#F5714F', 500:'#EE4D2D', 600:'#D8391A', 700:'#B22D14' },
+            secondary: { DEFAULT:'#6F4CFF', 50:'#F1EEFF', 100:'#E3DBFF', 500:'#6F4CFF', 600:'#5B37EA' },
+            ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
+            canvas: '#F9FAFB'
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(15,18,34,.05), 0 1px 1px rgba(15,18,34,.04)',
+            card: '0 8px 24px rgba(15,18,34,.08)',
+            lifted: '0 20px 60px rgba(15,18,34,.16)'
+          }
         }
       }
     }
   };
 </script>
+<script src="https://cdn.tailwindcss.com"></script>
 
 <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
@@ -211,7 +214,7 @@ function Hero({ onPrimaryCTA }) {
         <div className="relative">
           <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-5 rotate-1">
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-primary-md"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-primary"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-secondary-100"></span>
               <span className="w-2.5 h-2.5 rounded-full bg-canvas"></span>
               <span className="ml-auto text-[10px] text-ink-4 font-mono">wfm-internal-tool.onrender.com</span>
