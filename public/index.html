@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Cấu hình biến tailwind -->
 <script>
   window.tailwind = {
     config: {
@@ -17,7 +16,7 @@
         extend: {
           fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
           colors: {
-            primary: { DEFAULT:'#EE4D2D', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#F5714F', 500:'#EE4D2D', 600:'#D8391A', 700:'#B22D14' },
+            primary: { DEFAULT:'#FF6600', 50:'#FFF1EE', 100:'#FFE1D9', 400:'#FF8533', 500:'#FF6600', 600:'#E65C00', 700:'#CC5200' },
             secondary: { DEFAULT:'#6F4CFF', 50:'#F1EEFF', 100:'#E3DBFF', 500:'#6F4CFF', 600:'#5B37EA' },
             mint: { 50:'#E1F7EC', 500:'#059669' },
             sky: { 50:'#E7EEFF', 500:'#4361EE' },
@@ -41,27 +40,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" crossorigin></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js" crossorigin></script>
 
-<!-- Tích hợp CDN Lordicon cho Icon Động -->
+<!-- Tích hợp CDN Lordicon cho Icon Động to đẹp -->
 <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
 <style>
-  body{ background:#F9FAFB; }
-  .bg-noise{ background-image: radial-gradient(circle at 1px 1px, rgba(15,18,34,.05) 1px, transparent 0); background-size: 22px 22px; }
-  ::-webkit-scrollbar{ width:6px; height:6px }
-  ::-webkit-scrollbar-thumb{ background:#DDE1ED; border-radius:4px }
+  body { background:#F9FAFB; margin:0; padding:0; }
+  .bg-shopee-orange { background-color: #ff6600 !important; }
+  .bg-noise { background-image: radial-gradient(circle at 1px 1px, rgba(15,18,34,.05) 1px, transparent 0); background-size: 22px 22px; }
+  ::-webkit-scrollbar { width:6px; height:6px }
+  ::-webkit-scrollbar-thumb { background:#DDE1ED; border-radius:4px }
   
-  /* Keyframes Animation cho Icon sinh động */
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-8px); }
   }
-  .animate-float { animation: floatSlow 3.5s ease-in-out infinite; }
-  
-  @keyframes pulseGlow {
-    0%, 100% { opacity: 0.8; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
-  }
-  .animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+  .animate-float { animation: floatSlow 4s ease-in-out infinite; }
 </style>
 </head>
 <body class="font-sans text-ink antialiased">
@@ -89,10 +82,9 @@ const IconLogout = (p) => <Icon {...p}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 
 const IconSettings = (p) => <Icon {...p}><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.2M12 18.8V21M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M3 12h2.2M18.8 12H21M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></Icon>;
 const IconSearch = (p) => <Icon {...p}><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.2" y2="16.2"/></Icon>;
 const IconSparkle = (p) => <Icon {...p}><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></Icon>;
-const IconTrend = (p) => <Icon {...p}><polyline points="3 17 9 11 13 15 21 6"/><polyline points="15 6 21 6 21 12"/></Icon>;
 
-/* Component Icon Động Lordicon */
-const LordIcon = ({ src, trigger = "hover", size = 28, colors = "primary:#EE4D2D,secondary:#6F4CFF" }) => (
+/* Component Icon Động Lordicon TO & SẮC NÉT */
+const LordIcon = ({ src, trigger = "hover", size = 48, colors = "primary:#ff6600,secondary:#6F4CFF" }) => (
   <lord-icon
     src={src}
     trigger={trigger}
@@ -104,18 +96,18 @@ const LordIcon = ({ src, trigger = "hover", size = 28, colors = "primary:#EE4D2D
 /* ═══════════════════════════════ DATA ═══════════════════════════════ */
 const CATEGORIES = [
   { name:'Shift Scheduling', apps:[
-    { name:'AI Shift Scheduling', sub:'Tối ưu hoá lịch trực & HC Order', lordSrc:'https://cdn.lordicon.com/kthelyed.json', bg:'bg-primary-50', url:'https://shift-app-online.onrender.com' },
+    { name:'AI Shift Scheduling', sub:'Tối ưu hoá lịch trực & HC Order', lordSrc:'https://cdn.lordicon.com/kthelyed.json', bg:'bg-orange-50', url:'https://shift-app-online.onrender.com' },
   ]},
   { name:'HC Planning', apps:[
     { name:'AI Model Forecast',  sub:'Dự báo session volume', lordSrc:'https://cdn.lordicon.com/gqdnbjsd.json', bg:'bg-sky-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
     { name:'HC Simulation Tool', sub:'Mô phỏng kịch bản headcount', lordSrc:'https://cdn.lordicon.com/vufbfobn.json', bg:'bg-mint-50', url:'' },
   ]},
   { name:'AI Monitoring', apps:[
-    { name:'FC Accuracy Alert',     sub:'Cảnh báo độ lệch forecast', lordSrc:'https://cdn.lordicon.com/vdjwhaeb.json', bg:'bg-primary-50', url:'' },
+    { name:'FC Accuracy Alert',     sub:'Cảnh báo độ lệch forecast', lordSrc:'https://cdn.lordicon.com/vdjwhaeb.json', bg:'bg-orange-50', url:'' },
     { name:'Predictive Modeling',   sub:'Mô hình dự đoán xu hướng', lordSrc:'https://cdn.lordicon.com/jxaqagid.json', bg:'bg-sky-50', url:'' },
     { name:'Fulfillment Alert',     sub:'Cảnh báo fulfillment bất thường', lordSrc:'https://cdn.lordicon.com/ndgahpjy.json', bg:'bg-amber-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxUsjJbBJOYyZzvCcW1ZaqWnP61tTiy8jzxPp_UeI0t7g1nDXSc15THtP23Kuxuws3-/exec' },
     { name:'Compliance Alert',      sub:'Cảnh báo tuân thủ quy trình', lordSrc:'https://cdn.lordicon.com/huuqiuqa.json', bg:'bg-mint-50', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxyqo2fiPEMXDdRuqA-zeDLz1MWVXDKrdLYx7oSYs_kZldAbEAB2ivBX4mJydvKhXID/exec' },
-    { name:'Account-Invalid Alert', sub:'Cảnh báo tài khoản không hợp lệ', lordSrc:'https://cdn.lordicon.com/tdrtiskw.json', bg:'bg-primary-50', url:'' },
+    { name:'Account-Invalid Alert', sub:'Cảnh báo tài khoản không hợp lệ', lordSrc:'https://cdn.lordicon.com/tdrtiskw.json', bg:'bg-orange-50', url:'' },
   ]},
   { name:'AI Chatbot', apps:[
     { name:'WFM Agent', sub:'Trợ lý AI hỏi-đáp nghiệp vụ WFM', lordSrc:'https://cdn.lordicon.com/kddutrse.json', bg:'bg-secondary-50', url:'' },
@@ -123,7 +115,7 @@ const CATEGORIES = [
 ];
 
 const FEATURES = [
-  { lordSrc: "https://cdn.lordicon.com/kthelyed.json", bg:'bg-primary-50', title:'Tối ưu hoá lịch trực bằng AI', desc:'Tính toán HC Order tối ưu theo Coverage Target, Spike Event và quy tắc PT→FT chỉ trong vài giây.' },
+  { lordSrc: "https://cdn.lordicon.com/kthelyed.json", bg:'bg-orange-50', title:'Tối ưu hoá lịch trực bằng AI', desc:'Tính toán HC Order tối ưu theo Coverage Target, Spike Event và quy tắc PT→FT chỉ trong vài giây.' },
   { lordSrc: "https://cdn.lordicon.com/gqdnbjsd.json", bg:'bg-sky-50', title:'Dự báo Session Volume', desc:'Mô hình hybrid Weighted Moving Average + Event Pattern giúp dự báo lưu lượng sát thực tế.' },
   { lordSrc: "https://cdn.lordicon.com/huuqiuqa.json", bg:'bg-mint-50', title:'Giám sát & Cảnh báo Real-time', desc:'Tự động phát hiện sai lệch forecast, fulfillment bất thường và vi phạm compliance.' },
 ];
@@ -134,32 +126,26 @@ const TESTIMONIALS = [
   { name:'Phát T.', role:'QA & WFM Manager', quote:'Một nơi duy nhất cho toàn bộ công cụ WFM — không còn phải lục tìm link rải rác trong nhiều file.', rating:4 },
 ];
 
-const SOCIAL_PROOF = ['Workforce Management', 'LC Operations', 'Customer Service WFM'];
-
 /* ═══════════════════════════════ NAVBAR ═══════════════════════════════ */
 function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
   const [open, setOpen] = useState(false);
-  const links = [
-    { label:'Tính năng', href:'#features' },
-    { label:'Dashboard', href:'#dashboard' },
-    { label:'Đánh giá', href:'#testimonials' },
-  ];
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-ink/5">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ink/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-9 h-9 rounded-lg bg-primary-50 flex items-center justify-center shadow-soft p-1.5 animate-pulse-glow">
-            <img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain" onError={(e)=>{e.target.style.display='none'}}/>
-            <LordIcon src="https://cdn.lordicon.com/bgeum Robust.json" size={24} />
+        <a href="#top" className="flex items-center gap-3 shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center p-1">
+            <LordIcon src="https://cdn.lordicon.com/bgeum Robust.json" size={32} />
           </div>
           <div className="leading-tight">
-            <div className="font-extrabold text-[15px] tracking-tight text-ink">WFM Internal Tool</div>
-            <div className="text-[10.5px] text-ink-3"><span className="text-primary font-bold">Shopee</span> · WFM AI Suite</div>
+            <div className="font-extrabold text-[16px] tracking-tight text-ink">WFM Internal Tool</div>
+            <div className="text-[11px] text-ink-3"><span className="text-[#ff6600] font-extrabold">Shopee</span> · WFM AI Suite</div>
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-[13.5px] font-medium text-ink-2">
-          {links.map(l => <a key={l.href} href={l.href} className="hover:text-primary transition-colors">{l.label}</a>)}
+        <nav className="hidden md:flex items-center gap-8 text-[14px] font-semibold text-ink-2">
+          <a href="#features" className="hover:text-[#ff6600] transition-colors">Tính năng</a>
+          <a href="#dashboard" className="hover:text-[#ff6600] transition-colors">Dashboard</a>
+          <a href="#testimonials" className="hover:text-[#ff6600] transition-colors">Đánh giá</a>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -170,7 +156,7 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
                   <IconSettings size={16}/>
                 </button>}
               <div className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-full pl-1 pr-3 py-1">
-                <div className="w-6 h-6 rounded-full bg-secondary-50 text-secondary-500 text-[10px] font-extrabold flex items-center justify-center">
+                <div className="w-7 h-7 rounded-full bg-secondary-50 text-secondary-500 text-[11px] font-extrabold flex items-center justify-center">
                   {auth.user?.email ? auth.user.email.slice(0,2).toUpperCase() : 'U'}
                 </div>
                 <span className="text-[12px] text-ink-2 font-medium">{auth.user?.email}</span>
@@ -180,7 +166,7 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
               </button>
             </>
           ) : (
-            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-600 text-white text-[13.5px] font-bold px-5 py-2.5 rounded-lg shadow-soft transition-colors">
+            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-[#ff6600] hover:bg-[#e65c00] text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-colors">
               Đăng nhập <IconArrowRight size={15}/>
             </button>
           )}
@@ -193,11 +179,13 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
 
       {open && (
         <div className="md:hidden border-t border-ink/5 bg-white px-5 py-4 flex flex-col gap-3">
-          {links.map(l => <a key={l.href} href={l.href} onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">{l.label}</a>)}
+          <a href="#features" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Tính năng</a>
+          <a href="#dashboard" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Dashboard</a>
+          <a href="#testimonials" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Đánh giá</a>
           {auth.role && auth.role !== 'none' && auth.role !== 'loading' ? (
-            <button onClick={onLogout} className="text-left text-[14px] font-bold text-primary">Đăng xuất ({auth.user?.email})</button>
+            <button onClick={onLogout} className="text-left text-[14px] font-bold text-[#ff6600]">Đăng xuất ({auth.user?.email})</button>
           ) : (
-            <button onClick={onLogin} className="bg-primary text-white text-[14px] font-bold px-4 py-2.5 rounded-lg text-center">Đăng nhập</button>
+            <button onClick={onLogin} className="bg-[#ff6600] text-white text-[14px] font-bold px-4 py-2.5 rounded-xl text-center">Đăng nhập</button>
           )}
         </div>
       )}
@@ -205,85 +193,82 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
   );
 }
 
-/* ═══════════════════════════════ HERO ═══════════════════════════════ */
+/* ═══════════════════════════════ HERO (FIX CỨNG NÚT VÀ LỆCH FRAME) ═══════════════════════════════ */
 function Hero({ onPrimaryCTA }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-noise">
-      <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary-50 rounded-full blur-3xl opacity-70"></div>
-      <div className="absolute top-40 -left-24 w-80 h-80 bg-secondary-50 rounded-full blur-3xl opacity-70"></div>
-      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-14 items-center">
+    <section id="top" className="relative overflow-hidden bg-noise py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
-            <IconSparkle size={14} className="text-primary animate-spin"/> AI Suite cho Workforce Management
+            <IconSparkle size={14} className="text-[#ff6600]"/> AI Suite cho Workforce Management
           </div>
-          <h1 className="text-4xl md:text-[3.25rem] font-extrabold leading-[1.08] tracking-tight text-ink">
-            Vận hành đội ngũ WFM <span className="text-primary">thông minh hơn</span>, không còn đoán mò
+          <h1 className="text-3xl md:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
+            Vận hành đội ngũ WFM <span className="text-[#ff6600]">thông minh hơn</span>, không còn đoán mò
           </h1>
           <p className="mt-5 text-[16px] text-ink-3 leading-relaxed max-w-lg">
             Một nền tảng duy nhất cho lịch trực, dự báo headcount và giám sát vận hành contact center — được xây dựng riêng cho Shopee, chạy bằng AI.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {/* Sửa màu nút CTA hiển thị chuẩn chữ trắng trên nền đỏ */}
-            <button onClick={onPrimaryCTA} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-card transition-all hover:-translate-y-0.5">
-              Truy cập Dashboard <IconArrowRight size={17}/>
+
+          {/* SỬA NÚT CTA: Khắc phục triệt để lỗi chữ màu trắng tàng hình */}
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <button 
+              onClick={onPrimaryCTA} 
+              className="inline-flex items-center gap-2 bg-[#ff6600] hover:bg-[#e65c00] text-white font-extrabold text-[15px] px-7 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5 cursor-pointer">
+              Truy cập Dashboard <IconArrowRight size={18}/>
             </button>
-            <a href="#features" className="inline-flex items-center gap-2 bg-white border border-ink/10 text-ink-2 font-semibold px-6 py-3.5 rounded-xl hover:bg-canvas transition-colors">
+            <a 
+              href="#features" 
+              className="inline-flex items-center gap-2 bg-white border border-ink/15 text-ink-2 font-bold text-[15px] px-6 py-4 rounded-xl hover:bg-canvas transition-colors">
               Xem tính năng
             </a>
           </div>
-          <div className="mt-8 flex items-center gap-5 text-[12.5px] text-ink-3">
-            <div className="flex items-center gap-1.5"><IconCheck size={15} className="text-primary"/> Miễn phí nội bộ</div>
-            <div className="flex items-center gap-1.5"><IconCheck size={15} className="text-primary"/> Giới hạn domain @shopee.com</div>
+
+          <div className="mt-8 flex items-center gap-5 text-[12.5px] font-medium text-ink-3">
+            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-[#ff6600]"/> Miễn phí nội bộ</div>
+            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-[#ff6600]"/> Giới hạn domain @shopee.com</div>
           </div>
         </div>
 
+        {/* HERO CONTAINER CARD - ĐÃ SỬA LỖI ĐÈ BOX */}
         <div className="relative">
-          <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-5 rotate-1 animate-float">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-primary-100"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-secondary-100"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-canvas"></span>
-              <span className="ml-auto text-[10px] text-ink-4 font-mono">wfm-internal-tool.onrender.com</span>
+          <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
+            <div className="flex items-center justify-between border-b border-ink/5 pb-3 mb-5">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#ff6600]"></span>
+                <span className="w-3 h-3 rounded-full bg-secondary-500"></span>
+                <span className="w-3 h-3 rounded-full bg-mint-500"></span>
+              </div>
+              <span className="text-[11px] text-ink-4 font-mono">wfm-internal-tool.onrender.com</span>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+
+            <div className="grid grid-cols-2 gap-4">
               {[
-                {lordSrc:'https://cdn.lordicon.com/kthelyed.json', label:'Shift Scheduling', bg:'bg-primary-50'},
+                {lordSrc:'https://cdn.lordicon.com/kthelyed.json', label:'Shift Scheduling', bg:'bg-orange-50'},
                 {lordSrc:'https://cdn.lordicon.com/gqdnbjsd.json', label:'HC Forecast', bg:'bg-sky-50'},
                 {lordSrc:'https://cdn.lordicon.com/huuqiuqa.json', label:'Compliance Alert', bg:'bg-mint-50'},
                 {lordSrc:'https://cdn.lordicon.com/kddutrse.json', label:'WFM Agent', bg:'bg-amber-50'},
               ].map((c,i)=>(
-                <div key={i} className={`${c.bg} rounded-xl p-4 flex flex-col gap-2`}>
-                  <LordIcon src={c.lordSrc} size={32} />
-                  <span className="text-[11.5px] font-bold text-ink-2">{c.label}</span>
+                <div key={i} className={`${c.bg} rounded-xl p-4 flex flex-col items-center text-center gap-2`}>
+                  <LordIcon src={c.lordSrc} size={52} />
+                  <span className="text-[12.5px] font-bold text-ink">{c.label}</span>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="absolute -bottom-6 -left-6 bg-white border border-ink/10 rounded-xl shadow-card px-6 py-3.5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-primary-50 flex items-center justify-center">
-              <LordIcon src="https://cdn.lordicon.com/gqdnbjsd.json" size={22} />
-            </div>
-            <div>
-              <div className="text-[15px] font-extrabold leading-none text-ink">−80%</div>
-              <div className="text-[10px] text-ink-3 mt-0.5">Thời gian lên lịch</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-/* ═══════════════════════════════ SOCIAL PROOF ═══════════════════════════════ */
-function SocialProof() {
-  return (
-    <section className="border-y border-ink/5 bg-white py-10">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <p className="text-center text-[11.5px] font-bold tracking-widest text-ink-4 uppercase mb-7">Được các phòng ban tin dùng</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-          {SOCIAL_PROOF.map(name => (
-            <span key={name} className="text-[15px] font-extrabold text-ink-3/80 tracking-tight">{name}</span>
-          ))}
+            {/* Box chỉ số - Tích hợp gọn gàng trong Card, KHÔNG DÙNG POSITION ÂM GÂY LỆCH */}
+            <div className="mt-4 bg-orange-50 border border-[#ff6600]/20 rounded-xl p-3.5 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#ff6600] flex items-center justify-center text-white">
+                  <LordIcon src="https://cdn.lordicon.com/gqdnbjsd.json" size={28} colors="primary:#ffffff,secondary:#ffffff" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-ink-3 font-semibold">Tối ưu hiệu suất</div>
+                  <div className="text-[12px] font-bold text-ink">Tự động hoá lên lịch</div>
+                </div>
+              </div>
+              <span className="text-xl font-extrabold text-[#ff6600]">−80%</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -293,20 +278,20 @@ function SocialProof() {
 /* ═══════════════════════════════ FEATURES ═══════════════════════════════ */
 function Features() {
   return (
-    <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20 md:py-28">
+    <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[11.5px] font-bold tracking-widest text-primary uppercase mb-3">Tính năng cốt lõi</span>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#ff6600] uppercase mb-3">Tính năng cốt lõi</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Mọi thứ team WFM cần, trong một nơi</h2>
-        <p className="mt-4 text-ink-3 text-[15px]">Từ lập lịch, dự báo đến giám sát — tự động hoá bằng AI, giảm sai sót thủ công.</p>
+        <p className="mt-3 text-ink-3 text-[15px]">Từ lập lịch, dự báo đến giám sát — tự động hoá bằng AI, giảm sai sót thủ công.</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {FEATURES.map((f, i) => (
-          <div key={i} className="bg-white border border-ink/10 rounded-2xl p-7 hover:shadow-card hover:-translate-y-1 transition-all">
-            <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center mb-5`}>
-              <LordIcon src={f.lordSrc} size={32} />
+          <div key={i} className="bg-white border border-ink/10 rounded-2xl p-8 hover:shadow-card hover:-translate-y-1 transition-all">
+            <div className={`w-16 h-16 rounded-2xl ${f.bg} flex items-center justify-center mb-6`}>
+              <LordIcon src={f.lordSrc} size={48} />
             </div>
-            <h3 className="font-bold text-[16px] text-ink mb-2">{f.title}</h3>
-            <p className="text-[13.5px] text-ink-3 leading-relaxed">{f.desc}</p>
+            <h3 className="font-extrabold text-[18px] text-ink mb-3">{f.title}</h3>
+            <p className="text-[14px] text-ink-3 leading-relaxed">{f.desc}</p>
           </div>
         ))}
       </div>
@@ -324,34 +309,36 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
   })).filter(cat => cat.apps.length), [q]);
 
   return (
-    <section id="dashboard" className="bg-canvas py-20 md:py-28 border-y border-ink/5">
+    <section id="dashboard" className="bg-canvas py-20 border-y border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block text-[11.5px] font-bold tracking-widest text-secondary-500 uppercase mb-3">Dashboard</span>
+          <span className="inline-block text-[12px] font-bold tracking-widest text-secondary-500 uppercase mb-3">Dashboard</span>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Truy cập công cụ ngay tại đây</h2>
-          <p className="mt-4 text-ink-3 text-[15px]">Chỉ khả dụng cho tài khoản @shopee.com đã được cấp quyền.</p>
+          <p className="mt-3 text-ink-3 text-[15px]">Chỉ khả dụng cho tài khoản @shopee.com đã được cấp quyền.</p>
         </div>
 
         {auth.role === 'loading' && (
-          <div className="text-center text-ink-3 text-[13px] py-10">Đang xác thực...</div>
+          <div className="text-center text-ink-3 text-[14px] py-10">Đang xác thực...</div>
         )}
 
         {auth.role !== 'loading' && !auth.user && (
           <div className="max-w-md mx-auto bg-white border border-ink/10 rounded-2xl shadow-card p-10 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-5"><IconLock size={22} className="text-primary"/></div>
-            <h3 className="font-bold text-[16px] text-ink mb-2">Cần đăng nhập để xem Dashboard</h3>
-            <p className="text-[13px] text-ink-3 mb-6">Đăng nhập bằng tài khoản Google @shopee.com để truy cập danh sách công cụ.</p>
-            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-600 text-white font-bold px-6 py-3 rounded-xl transition-colors">
-              Đăng nhập bằng Google <IconArrowRight size={15}/>
+            <div className="w-16 h-16 rounded-2xl bg-orange-50 flex items-center justify-center mx-auto mb-5">
+              <LordIcon src="https://cdn.lordicon.com/huuqiuqa.json" size={40} />
+            </div>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Cần đăng nhập để xem Dashboard</h3>
+            <p className="text-[13.5px] text-ink-3 mb-6">Đăng nhập bằng tài khoản Google @shopee.com để truy cập danh sách công cụ.</p>
+            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-[#ff6600] hover:bg-[#e65c00] text-white font-bold px-7 py-3.5 rounded-xl transition-colors">
+              Đăng nhập bằng Google <IconArrowRight size={16}/>
             </button>
           </div>
         )}
 
         {auth.role === 'none' && auth.user && (
           <div className="max-w-md mx-auto bg-white border border-ink/10 rounded-2xl shadow-card p-10 text-center">
-            <span className="inline-block bg-secondary-50 text-secondary-500 text-[10.5px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Đang chờ duyệt</span>
-            <h3 className="font-bold text-[16px] text-ink mb-2">Yêu cầu truy cập đã được gửi</h3>
-            <p className="text-[13px] text-ink-3">Tài khoản <strong className="text-ink-2">{auth.user.email}</strong> chưa được cấp quyền. Vui lòng liên hệ Admin để được duyệt.</p>
+            <span className="inline-block bg-secondary-50 text-secondary-500 text-[11px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Đang chờ duyệt</span>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Yêu cầu truy cập đã được gửi</h3>
+            <p className="text-[13.5px] text-ink-3">Tài khoản <strong className="text-ink-2">{auth.user.email}</strong> chưa được cấp quyền. Vui lòng liên hệ Admin để được duyệt.</p>
           </div>
         )}
 
@@ -359,13 +346,13 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
           <div>
             <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-10">
               <div className="relative flex-1">
-                <IconSearch size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"/>
+                <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"/>
                 <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Tìm kiếm công cụ..."
-                  className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[13.5px] outline-none focus:border-primary focus:ring-4 focus:ring-primary-50 transition-all"/>
+                  className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[14px] outline-none focus:border-[#ff6600] focus:ring-4 focus:ring-orange-100 transition-all"/>
               </div>
               {auth.role === 'owner' &&
                 <button onClick={onOpenAdmin} className="h-12 px-5 rounded-full border border-ink/10 bg-white text-[13px] font-semibold text-ink-2 hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
-                  <IconSettings size={15}/> Quản lý truy cập
+                  <IconSettings size={16}/> Quản lý truy cập
                 </button>}
             </div>
 
@@ -373,27 +360,27 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               {filtered.map(cat => (
                 <div key={cat.name}>
                   <div className="flex items-center gap-2.5 mb-4">
-                    <span className="w-1 h-5 rounded-sm bg-secondary-500"></span>
-                    <h3 className="font-extrabold text-[13.5px] tracking-wide uppercase text-ink">{cat.name}</h3>
-                    <span className="text-[10.5px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Ứng Dụng</span>
+                    <span className="w-1.5 h-5 rounded-sm bg-[#ff6600]"></span>
+                    <h3 className="font-extrabold text-[14px] tracking-wide uppercase text-ink">{cat.name}</h3>
+                    <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Ứng Dụng</span>
                   </div>
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {cat.apps.map(a => {
                       const hasLink = !!a.url;
                       const Tag = hasLink ? 'a' : 'div';
                       const extraProps = hasLink ? { href: a.url, target:'_blank', rel:'noopener' } : {};
                       return (
                         <Tag key={a.name} {...extraProps}
-                          className={`relative bg-white border border-ink/10 rounded-xl p-4 flex items-center gap-3 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-0.5 hover:border-primary-100 cursor-pointer' : 'opacity-55 cursor-not-allowed'}`}>
+                          className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-[#ff6600]/30 cursor-pointer' : 'opacity-55 cursor-not-allowed'}`}>
                           {hasLink
-                            ? <IconExternal size={13} className="absolute top-3 right-3 text-ink-4"/>
-                            : <span className="absolute top-2.5 right-2.5 text-[8.5px] font-extrabold uppercase bg-secondary-50 text-secondary-500 px-2 py-0.5 rounded-full">Chưa gắn link</span>}
-                          <div className={`w-10 h-10 rounded-lg ${a.bg} flex items-center justify-center shrink-0`}>
-                            <LordIcon src={a.lordSrc} size={24} />
+                            ? <IconExternal size={15} className="absolute top-3.5 right-3.5 text-ink-4"/>
+                            : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-secondary-50 text-secondary-500 px-2 py-0.5 rounded-full">Chưa gắn link</span>}
+                          <div className={`w-12 h-12 rounded-xl ${a.bg} flex items-center justify-center shrink-0`}>
+                            <LordIcon src={a.lordSrc} size={32} />
                           </div>
                           <div className="min-w-0">
-                            <div className="font-bold text-[13px] text-ink truncate">{a.name}</div>
-                            <div className="text-[11px] text-ink-3 truncate">{a.sub}</div>
+                            <div className="font-bold text-[14px] text-ink truncate">{a.name}</div>
+                            <div className="text-[11.5px] text-ink-3 truncate">{a.sub}</div>
                           </div>
                         </Tag>
                       );
@@ -412,26 +399,25 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
 /* ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ */
 function Testimonials() {
   return (
-    <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20 md:py-28">
+    <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[11.5px] font-bold tracking-widest text-primary uppercase mb-3">Phản hồi nội bộ</span>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#ff6600] uppercase mb-3">Phản hồi nội bộ</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Đội ngũ WFM nói gì</h2>
-        <p className="mt-3 text-[12px] text-ink-4 italic">* Nội dung minh hoạ — cập nhật bằng phản hồi thật của team khi triển khai.</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {TESTIMONIALS.map((t, i) => (
           <div key={i} className="bg-white border border-ink/10 rounded-2xl p-7 flex flex-col">
             <div className="flex gap-1 mb-4">
-              {Array.from({length:5}).map((_,s) => <IconStar key={s} size={15} filled={s < t.rating} className={s < t.rating ? 'text-primary' : 'text-ink/15'}/>)}
+              {Array.from({length:5}).map((_,s) => <IconStar key={s} size={16} filled={s < t.rating} className={s < t.rating ? 'text-[#ff6600]' : 'text-ink/15'}/>)}
             </div>
-            <p className="text-[13.5px] text-ink-2 leading-relaxed flex-1">"{t.quote}"</p>
+            <p className="text-[14px] text-ink-2 leading-relaxed flex-1">"{t.quote}"</p>
             <div className="flex items-center gap-3 mt-6 pt-5 border-t border-ink/5">
-              <div className="w-9 h-9 rounded-full bg-secondary-50 text-secondary-500 text-[11px] font-extrabold flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-orange-50 text-[#ff6600] text-[12px] font-extrabold flex items-center justify-center">
                 {t.name.split(' ').map(w=>w[0]).join('').toUpperCase()}
               </div>
               <div>
-                <div className="text-[13px] font-bold leading-tight text-ink">{t.name}</div>
-                <div className="text-[11px] text-ink-3">{t.role}</div>
+                <div className="text-[14px] font-bold text-ink">{t.name}</div>
+                <div className="text-[12px] text-ink-3">{t.role}</div>
               </div>
             </div>
           </div>
@@ -441,26 +427,25 @@ function Testimonials() {
   );
 }
 
-/* ═══════════════════════════════ CTA BANNER ═══════════════════════════════ */
+/* ═══════════════════════════════ CTA BANNER - MÀU #FF6600 THUẦN CHUẨN ĐẸP ═══════════════════════════════ */
 function CTABanner({ onLogin }) {
   return (
-    <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-20 md:pb-28">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-600 to-secondary-600 px-8 py-16 md:py-20 text-center shadow-lifted">
-        <div className="absolute -top-16 -left-16 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-16 -right-16 w-72 h-72 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="relative z-10">
+    <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-20">
+      <div className="relative overflow-hidden rounded-3xl bg-shopee-orange px-8 py-16 text-center shadow-lifted">
+        <div className="relative z-10 max-w-2xl mx-auto">
           <div className="mb-4 inline-block">
-            <LordIcon src="https://cdn.lordicon.com/kddutrse.json" size={48} colors="primary:#ffffff,secondary:#ffffff" />
+            <LordIcon src="https://cdn.lordicon.com/kddutrse.json" size={64} colors="primary:#ffffff,secondary:#ffffff" />
           </div>
-          {/* Đảm bảo chữ trắng hiển thị rõ ràng trên nền gradient đỏ-tím */}
-          <h2 className="text-2xl md:text-3xl font-extrabold text-white max-w-xl mx-auto leading-snug">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight">
             Sẵn sàng tối ưu hoá vận hành đội ngũ WFM của bạn?
           </h2>
-          <p className="mt-3 text-white/90 text-[14px] max-w-md mx-auto font-medium">
+          <p className="mt-4 text-white/95 text-[15px] font-medium">
             Đăng nhập bằng tài khoản Shopee để truy cập toàn bộ công cụ ngay hôm nay.
           </p>
-          <button onClick={onLogin} className="mt-8 inline-flex items-center gap-2 bg-white text-primary hover:bg-primary-50 font-bold px-7 py-3.5 rounded-xl shadow-card hover:-translate-y-0.5 transition-all">
-            Đăng nhập ngay <IconArrowRight size={17}/>
+          <button 
+            onClick={onLogin} 
+            className="mt-8 inline-flex items-center gap-2 bg-white text-[#ff6600] hover:bg-orange-50 font-extrabold text-[15px] px-8 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5">
+            Đăng nhập ngay <IconArrowRight size={18}/>
           </button>
         </div>
       </div>
@@ -468,7 +453,7 @@ function CTABanner({ onLogin }) {
   );
 }
 
-/* ═══════════════════════════════ FOOTER (Đã fix màu chữ tương phản cao) ═══════════════════════════════ */
+/* ═══════════════════════════════ FOOTER - CHỮ TRẮNG NỀN #FF6600 ĐẸP MẮT ═══════════════════════════════ */
 function Footer() {
   const cols = [
     { title:'Sản phẩm', links:[['Tính năng','#features'],['Dashboard','#dashboard'],['Đánh giá','#testimonials']] },
@@ -476,26 +461,25 @@ function Footer() {
     { title:'Liên hệ', links:[['WFM Team','#'],['IT Helpdesk','#']] },
   ];
   return (
-    <footer className="bg-[#0F1222] text-gray-300">
+    <footer className="bg-shopee-orange text-white">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center p-1">
-              <img src="/assets/logo-icon.png" alt="Shopee" className="w-full h-full object-contain" onError={(e)=>{e.target.style.display='none'}}/>
-              <LordIcon src="https://cdn.lordicon.com/bgeum Robust.json" size={20} />
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center p-1">
+              <LordIcon src="https://cdn.lordicon.com/bgeum Robust.json" size={28} colors="primary:#ffffff,secondary:#ffffff" />
             </div>
-            <span className="font-extrabold text-white text-[15px]">WFM Internal Tool</span>
+            <span className="font-extrabold text-white text-[17px]">WFM Internal Tool</span>
           </div>
-          <p className="text-[13px] text-gray-400 leading-relaxed max-w-[240px]">
+          <p className="text-[13px] text-white/90 leading-relaxed max-w-[240px]">
             Shopee WFM AI Suite — nền tảng nội bộ cho lập lịch, dự báo và giám sát vận hành contact center.
           </p>
         </div>
         {cols.map(c => (
           <div key={c.title}>
-            <div className="text-white text-[12px] font-bold uppercase tracking-wider mb-4">{c.title}</div>
+            <div className="text-white text-[13px] font-extrabold uppercase tracking-wider mb-4 border-b border-white/20 pb-1 inline-block">{c.title}</div>
             <div className="flex flex-col gap-2.5">
               {c.links.map(([label,href]) => (
-                <a key={label} href={href} className="text-[13px] text-gray-300 hover:text-primary transition-colors">
+                <a key={label} href={href} className="text-[13.5px] text-white/90 hover:text-white hover:underline transition-all">
                   {label}
                 </a>
               ))}
@@ -503,10 +487,10 @@ function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10 py-6">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px]">
-          <span className="text-gray-400">© {new Date().getFullYear()} Shopee. Internal tool — không dùng ngoài mục đích công việc.</span>
-          <span className="text-gray-400 font-mono">wfm-internal-tool.onrender.com</span>
+      <div className="border-t border-white/20 py-6">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px]">
+          <span className="text-white/90">© {new Date().getFullYear()} Shopee. Internal tool — không dùng ngoài mục đích công việc.</span>
+          <span className="text-white/90 font-mono font-bold">wfm-internal-tool.onrender.com</span>
         </div>
       </div>
     </footer>
@@ -536,27 +520,27 @@ function AdminModal({ onClose }) {
       <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose}></div>
       <div className="relative bg-white rounded-2xl w-full max-w-md max-h-[82vh] overflow-y-auto shadow-lifted">
         <div className="flex items-center justify-between px-6 py-4.5 border-b border-ink/10">
-          <h3 className="font-extrabold text-[15px] text-ink">Quản lý truy cập</h3>
-          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-canvas text-ink-3"><IconX size={17}/></button>
+          <h3 className="font-extrabold text-[16px] text-ink">Quản lý truy cập</h3>
+          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-canvas text-ink-3"><IconX size={18}/></button>
         </div>
         <div className="p-6">
           {loading ? <div className="text-center text-[13px] text-ink-3 py-8">Đang tải...</div> : (
             <>
               <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mb-2.5">Yêu cầu chờ duyệt</div>
-              {pending.length === 0 && <div className="text-[12px] text-ink-4 mb-5">Không có yêu cầu nào.</div>}
+              {pending.length === 0 && <div className="text-[12.5px] text-ink-4 mb-5">Không có yêu cầu nào.</div>}
               {pending.map(e => (
-                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[12.5px]">
+                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>approve(e)} className="bg-green-600 hover:bg-green-700 text-white text-[11px] font-bold px-3 py-1.5 rounded-md">Duyệt</button>
-                  <button onClick={()=>deny(e)} className="border border-ink/10 text-ink-3 hover:bg-gray-100 text-[11px] font-bold px-3 py-1.5 rounded-md">Từ chối</button>
+                  <button onClick={()=>approve(e)} className="bg-green-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-md">Duyệt</button>
+                  <button onClick={()=>deny(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Từ chối</button>
                 </div>
               ))}
               <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mt-6 mb-2.5">Thành viên đã duyệt</div>
-              {members.length === 0 && <div className="text-[12px] text-ink-4">Chưa có thành viên nào.</div>}
+              {members.length === 0 && <div className="text-[12.5px] text-ink-4">Chưa có thành viên nào.</div>}
               {members.map(e => (
-                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[12.5px]">
+                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>removeMember(e)} className="border border-ink/10 text-ink-3 hover:bg-gray-100 text-[11px] font-bold px-3 py-1.5 rounded-md">Gỡ quyền</button>
+                  <button onClick={()=>removeMember(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Gỡ quyền</button>
                 </div>
               ))}
             </>
@@ -585,7 +569,6 @@ function App() {
     <div>
       <Navbar auth={auth} onLogin={goLogin} onLogout={goLogout} onOpenAdmin={()=>setShowAdmin(true)}/>
       <Hero onPrimaryCTA={scrollToDashboard}/>
-      <SocialProof/>
       <Features/>
       <Dashboard auth={auth} onLogin={goLogin} onOpenAdmin={()=>setShowAdmin(true)}/>
       <Testimonials/>
