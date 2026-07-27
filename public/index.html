@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WFM Internal Tool — Shopee</title>
-<meta name="description" content="Shopee WFM AI Suite — tự động hoá lịch trực, dự báo headcount và giám sát vận hành contact center bằng AI.">
+<meta name="description" content="Shopee WFM AI Suite — Automate shift scheduling, headcount forecasting, and contact center operations monitoring with AI.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Tailwind CDN & Config chuẩn -->
+<!-- Tailwind CDN & Config -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -88,37 +88,37 @@ const LogoHeader = () => (
   </div>
 );
 
-/* ═══════════════════════════════ DATA DÙNG ICON 3D TRỰC QUAN ═══════════════════════════════ */
+/* ═══════════════════════════════ DATA WITH 3D ICONS ═══════════════════════════════ */
 const CATEGORIES = [
   { name:'Shift Scheduling', apps:[
-    { name:'AI Shift Scheduling', sub:'Tối ưu hoá lịch trực & HC Order', img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', url:'https://shift-app-online.onrender.com' },
+    { name:'AI Shift Scheduling', sub:'Optimize schedules & HC Orders', img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', url:'https://shift-app-online.onrender.com' },
   ]},
   { name:'HC Planning', apps:[
-    { name:'AI Model Forecast',  sub:'Dự báo session volume', img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
-    { name:'HC Simulation Tool', sub:'Mô phỏng kịch bản headcount', img: 'https://cdn-icons-png.flaticon.com/512/4241/4241664.png', url:'' },
+    { name:'AI Model Forecast',  sub:'Forecast session volumes', img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
+    { name:'HC Simulation Tool', sub:'Simulate headcount scenarios', img: 'https://cdn-icons-png.flaticon.com/512/4241/4241664.png', url:'' },
   ]},
   { name:'AI Monitoring', apps:[
-    { name:'FC Accuracy Alert',     sub:'Cảnh báo độ lệch forecast', img: 'https://cdn-icons-png.flaticon.com/512/564/564619.png', url:'' },
-    { name:'Predictive Modeling',   sub:'Mô hình dự đoán xu hướng', img: 'https://cdn-icons-png.flaticon.com/512/2103/2103633.png', url:'' },
-    { name:'Fulfillment Alert',     sub:'Cảnh báo fulfillment bất thường', img: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxUsjJbBJOYyZzvCcW1ZaqWnP61tTiy8jzxPp_UeI0t7g1nDXSc15THtP23Kuxuws3-/exec' },
-    { name:'Compliance Alert',      sub:'Cảnh báo tuân thủ quy trình', img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxyqo2fiPEMXDdRuqA-zeDLz1MWVXDKrdLYx7oSYs_kZldAbEAB2ivBX4mJydvKhXID/exec' },
-    { name:'Account-Invalid Alert', sub:'Cảnh báo tài khoản không hợp lệ', img: 'https://cdn-icons-png.flaticon.com/512/6711/6711656.png', url:'' },
+    { name:'FC Accuracy Alert',     sub:'Forecast variance alerts', img: 'https://cdn-icons-png.flaticon.com/512/564/564619.png', url:'' },
+    { name:'Predictive Modeling',   sub:'Trend prediction models', img: 'https://cdn-icons-png.flaticon.com/512/2103/2103633.png', url:'' },
+    { name:'Fulfillment Alert',     sub:'Real-time fulfillment anomaly alerts', img: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxUsjJbBJOYyZzvCcW1ZaqWnP61tTiy8jzxPp_UeI0t7g1nDXSc15THtP23Kuxuws3-/exec' },
+    { name:'Compliance Alert',      sub:'Process compliance violation alerts', img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxyqo2fiPEMXDdRuqA-zeDLz1MWVXDKrdLYx7oSYs_kZldAbEAB2ivBX4mJydvKhXID/exec' },
+    { name:'Account-Invalid Alert', sub:'Invalid account detection', img: 'https://cdn-icons-png.flaticon.com/512/6711/6711656.png', url:'' },
   ]},
   { name:'AI Chatbot', apps:[
-    { name:'WFM Agent', sub:'Trợ lý AI hỏi-đáp nghiệp vụ WFM', img: 'https://cdn-icons-png.flaticon.com/512/4712/4712035.png', url:'' },
+    { name:'WFM Agent', sub:'AI Assistant for WFM domain support', img: 'https://cdn-icons-png.flaticon.com/512/4712/4712035.png', url:'' },
   ]}
 ];
 
 const FEATURES = [
-  { img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', title:'Tối ưu hoá lịch trực bằng AI', desc:'Tính toán HC Order tối ưu theo Coverage Target, Spike Event và quy tắc PT→FT chỉ trong vài giây.' },
-  { img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', title:'Dự báo Session Volume', desc:'Mô hình hybrid Weighted Moving Average + Event Pattern giúp dự báo lưu lượng sát thực tế.' },
-  { img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', title:'Giám sát & Cảnh báo Real-time', desc:'Tự động phát hiện sai lệch forecast, fulfillment bất thường và vi phạm compliance.' },
+  { img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', title:'AI-Powered Shift Scheduling', desc:'Calculate optimal HC Orders based on Coverage Targets, Spike Events, and PT/FT constraints in seconds.' },
+  { img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', title:'Session Volume Forecasting', desc:'Utilize a hybrid Weighted Moving Average + Event Pattern model to forecast call/chat volume accurately.' },
+  { img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', title:'Real-time Monitoring & Alerts', desc:'Automatically detect forecast variances, fulfillment anomalies, and compliance violations as they happen.' },
 ];
 
 const TESTIMONIALS = [
-  { name:'Ryan', role:'WFM Planning', quote:'Giảm hơn 80% thời gian lên lịch trực thủ công. Số liệu HC Order chính xác hơn hẳn so với Excel trước đây.', rating:5 },
-  { name:'Nhứt Ng.', role:'WFM Analyst', quote:'Cảnh báo Fulfillment Alert giúp team phát hiện bất thường sớm hơn nhiều so với quy trình cũ.', rating:5 },
-  { name:'Phát T.', role:'QA & WFM Manager', quote:'Một nơi duy nhất cho toàn bộ công cụ WFM — không còn phải lục tìm link rải rác trong nhiều file.', rating:4 },
+  { name:'Ryan', role:'WFM Planning', quote:'Reduced manual scheduling time by over 80%. The HC Order accuracy is significantly higher compared to our legacy Excel spreadsheets.', rating:5 },
+  { name:'Nhut Ng.', role:'WFM Analyst', quote:'The Fulfillment Alert system allows our team to identify and act on operational anomalies far earlier than before.', rating:5 },
+  { name:'Phat T.', role:'QA & WFM Manager', quote:'A centralized hub for all WFM tools—no more searching through scattered links across multiple documents.', rating:4 },
 ];
 
 /* ═══════════════════════════════ NAVBAR ═══════════════════════════════ */
@@ -136,16 +136,16 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
         </a>
 
         <nav className="hidden md:flex items-center gap-8 text-[14px] font-semibold text-ink-2">
-          <a href="#features" className="hover:text-shopee transition-colors">Tính năng</a>
+          <a href="#features" className="hover:text-shopee transition-colors">Features</a>
           <a href="#dashboard" className="hover:text-shopee transition-colors">Dashboard</a>
-          <a href="#testimonials" className="hover:text-shopee transition-colors">Đánh giá</a>
+          <a href="#testimonials" className="hover:text-shopee transition-colors">Testimonials</a>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
           {auth.role && auth.role !== 'none' && auth.role !== 'loading' ? (
             <>
               {auth.role === 'owner' &&
-                <button onClick={onOpenAdmin} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Quản lý truy cập">
+                <button onClick={onOpenAdmin} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Access Control">
                   <IconSettings size={16}/>
                 </button>}
               <div className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-full pl-1 pr-3 py-1">
@@ -154,13 +154,13 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
                 </div>
                 <span className="text-[12px] text-ink-2 font-medium">{auth.user?.email}</span>
               </div>
-              <button onClick={onLogout} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Đăng xuất">
+              <button onClick={onLogout} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Log Out">
                 <IconLogout size={16}/>
               </button>
             </>
           ) : (
             <button onClick={onLogin} className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-colors">
-              Đăng nhập <IconArrowRight size={15}/>
+              Sign In <IconArrowRight size={15}/>
             </button>
           )}
         </div>
@@ -172,13 +172,13 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin }) {
 
       {open && (
         <div className="md:hidden border-t border-ink/5 bg-white px-5 py-4 flex flex-col gap-3">
-          <a href="#features" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Tính năng</a>
+          <a href="#features" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Features</a>
           <a href="#dashboard" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Dashboard</a>
-          <a href="#testimonials" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Đánh giá</a>
+          <a href="#testimonials" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Testimonials</a>
           {auth.role && auth.role !== 'none' && auth.role !== 'loading' ? (
-            <button onClick={onLogout} className="text-left text-[14px] font-bold text-shopee">Đăng xuất ({auth.user?.email})</button>
+            <button onClick={onLogout} className="text-left text-[14px] font-bold text-shopee">Sign Out ({auth.user?.email})</button>
           ) : (
-            <button onClick={onLogin} className="bg-shopee text-white text-[14px] font-bold px-4 py-2.5 rounded-xl text-center">Đăng nhập</button>
+            <button onClick={onLogin} className="bg-shopee text-white text-[14px] font-bold px-4 py-2.5 rounded-xl text-center">Sign In</button>
           )}
         </div>
       )}
@@ -193,35 +193,35 @@ function Hero({ onPrimaryCTA }) {
       <div className="max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
-            <IconSparkle size={14} className="text-shopee"/> AI Suite cho Workforce Management
+            <IconSparkle size={14} className="text-shopee"/> AI Suite for Workforce Management
           </div>
           <h1 className="text-3xl md:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
-            Vận hành đội ngũ WFM <span className="text-[#FF6600]">thông minh hơn</span>, không còn đoán mò
+            Empower WFM operations <span className="text-[#FF6600]">smarter</span> with data, not guesswork
           </h1>
           <p className="mt-5 text-[16px] text-ink-3 leading-relaxed max-w-lg">
-            Một nền tảng duy nhất cho lịch trực, dự báo headcount và giám sát vận hành contact center — được xây dựng riêng cho Shopee, chạy bằng AI.
+            A unified platform for shift scheduling, headcount forecasting, and contact center operations monitoring—built exclusively for Shopee, powered by AI.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <button 
               onClick={onPrimaryCTA} 
               className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white font-extrabold text-[15px] px-7 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5 cursor-pointer">
-              Truy cập Dashboard <IconArrowRight size={18}/>
+              Go to Dashboard <IconArrowRight size={18}/>
             </button>
             <a 
               href="#features" 
               className="inline-flex items-center gap-2 bg-white border border-ink/15 text-ink-2 font-bold text-[15px] px-6 py-4 rounded-xl hover:bg-canvas transition-colors">
-              Xem tính năng
+              Explore Features
             </a>
           </div>
 
           <div className="mt-8 flex items-center gap-5 text-[12.5px] font-medium text-ink-3">
-            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Miễn phí nội bộ</div>
-            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Giới hạn domain @shopee.com</div>
+            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Free internal access</div>
+            <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Restricted to @shopee.com domain</div>
           </div>
         </div>
 
-        {/* BOX FLOAT WITH 3D ICONS */}
+        {/* FLOATING CARD WITH 3D ICONS */}
         <div className="relative">
           <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
             <div className="flex items-center justify-between border-b border-ink/5 pb-3 mb-5">
@@ -257,8 +257,8 @@ function Hero({ onPrimaryCTA }) {
                   <IconSparkle size={22} />
                 </div>
                 <div>
-                  <div className="text-[11px] text-ink-3 font-semibold">Tối ưu hiệu suất</div>
-                  <div className="text-[12.5px] font-bold text-ink">Tự động hoá lên lịch</div>
+                  <div className="text-[11px] text-ink-3 font-semibold">Efficiency Boost</div>
+                  <div className="text-[12.5px] font-bold text-ink">Automated Scheduling</div>
                 </div>
               </div>
               <span className="text-2xl font-extrabold text-shopee">−80%</span>
@@ -275,9 +275,9 @@ function Features() {
   return (
     <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">TÍNH NĂNG CỐT LÕI</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Mọi thứ team WFM cần, trong một nơi</h2>
-        <p className="mt-3 text-ink-3 text-[15px]">Từ lập lịch, dự báo đến giám sát — tự động hoá bằng AI, giảm sai sót thủ công.</p>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">CORE FEATURES</span>
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Everything your WFM team needs in one place</h2>
+        <p className="mt-3 text-ink-3 text-[15px]">From scheduling to forecasting and operational monitoring—AI-automated to eliminate manual errors.</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {FEATURES.map((f, i) => {
@@ -310,12 +310,12 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">DASHBOARD</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Truy cập công cụ ngay tại đây</h2>
-          <p className="mt-3 text-ink-3 text-[15px]">Chỉ khả dụng cho tài khoản @shopee.com đã được cấp quyền.</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Access Applications</h2>
+          <p className="mt-3 text-ink-3 text-[15px]">Exclusively available for authorized @shopee.com accounts.</p>
         </div>
 
         {auth.role === 'loading' && (
-          <div className="text-center text-ink-3 text-[14px] py-10">Đang xác thực...</div>
+          <div className="text-center text-ink-3 text-[14px] py-10">Authenticating...</div>
         )}
 
         {auth.role !== 'loading' && !auth.user && (
@@ -323,19 +323,19 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
             <div className="w-16 h-16 rounded-2xl bg-shopee-light flex items-center justify-center mx-auto mb-5 text-shopee">
               <IconLock size={32} />
             </div>
-            <h3 className="font-bold text-[18px] text-ink mb-2">Cần đăng nhập để xem Dashboard</h3>
-            <p className="text-[13.5px] text-ink-3 mb-6">Đăng nhập bằng tài khoản Google @shopee.com để truy cập danh sách công cụ.</p>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Sign in to view Dashboard</h3>
+            <p className="text-[13.5px] text-ink-3 mb-6">Log in with your Google @shopee.com account to access the application hub.</p>
             <button onClick={onLogin} className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white font-bold px-7 py-3.5 rounded-xl transition-colors">
-              Đăng nhập bằng Google <IconArrowRight size={16}/>
+              Sign in with Google <IconArrowRight size={16}/>
             </button>
           </div>
         )}
 
         {auth.role === 'none' && auth.user && (
           <div className="max-w-md mx-auto bg-white border border-ink/10 rounded-2xl shadow-card p-10 text-center">
-            <span className="inline-block bg-shopee-light text-shopee text-[11px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Đang chờ duyệt</span>
-            <h3 className="font-bold text-[18px] text-ink mb-2">Yêu cầu truy cập đã được gửi</h3>
-            <p className="text-[13.5px] text-ink-3">Tài khoản <strong className="text-ink-2">{auth.user.email}</strong> chưa được cấp quyền. Vui lòng liên hệ Admin để được duyệt.</p>
+            <span className="inline-block bg-shopee-light text-shopee text-[11px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Pending Approval</span>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Access Request Submitted</h3>
+            <p className="text-[13.5px] text-ink-3">Account <strong className="text-ink-2">{auth.user.email}</strong> has not been authorized yet. Please contact an Administrator for access.</p>
           </div>
         )}
 
@@ -344,12 +344,12 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
             <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-10">
               <div className="relative flex-1">
                 <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"/>
-                <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Tìm kiếm công cụ..."
+                <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools and applications..."
                   className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[14px] outline-none focus:border-shopee focus:ring-4 focus:ring-shopee-light transition-all"/>
               </div>
               {auth.role === 'owner' &&
                 <button onClick={onOpenAdmin} className="h-12 px-5 rounded-full border border-ink/10 bg-white text-[13px] font-semibold text-ink-2 hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
-                  <IconSettings size={16}/> Quản lý truy cập
+                  <IconSettings size={16}/> Access Control
                 </button>}
             </div>
 
@@ -359,7 +359,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                   <div className="flex items-center gap-2.5 mb-4">
                     <span className="w-1.5 h-5 rounded-sm bg-[#FF6600]"></span>
                     <h3 className="font-extrabold text-[14px] tracking-wide uppercase text-ink">{cat.name}</h3>
-                    <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Ứng Dụng</span>
+                    <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Apps</span>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {cat.apps.map(a => {
@@ -371,9 +371,9 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                           className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                           {hasLink
                             ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
-                            : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Chưa gắn link</span>}
+                            : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
                           
-                          {/* KHUNG ICON 3D HÌNH ẢNH */}
+                          {/* 3D ICON IMAGE CONTAINER */}
                           <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center shrink-0 border border-black/5 p-2 shadow-inner">
                             <img src={a.img} className="w-full h-full object-contain" alt={a.name} />
                           </div>
@@ -401,8 +401,8 @@ function Testimonials() {
   return (
     <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">PHẢN HỒI NỘI BỘ</span>
-        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Đội ngũ WFM nói gì</h2>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">INTERNAL FEEDBACK</span>
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">What our WFM team says</h2>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {TESTIMONIALS.map((t, i) => (
@@ -437,15 +437,15 @@ function CTABanner({ onLogin }) {
             <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" className="w-10 h-10 object-contain" alt="Robot Icon" />
           </div>
           <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight">
-            Sẵn sàng tối ưu hoá vận hành đội ngũ WFM của bạn?
+            Ready to optimize your WFM team operations?
           </h2>
           <p className="mt-4 text-white/95 text-[15px] font-medium">
-            Đăng nhập bằng tài khoản Shopee để truy cập toàn bộ công cụ ngay hôm nay.
+            Sign in with your Shopee account to access all suite applications today.
           </p>
           <button 
             onClick={onLogin} 
             className="mt-8 inline-flex items-center gap-2 bg-white text-shopee hover:bg-shopee-light font-extrabold text-[15px] px-8 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5">
-            Đăng nhập ngay <IconArrowRight size={18}/>
+            Get Started Now <IconArrowRight size={18}/>
           </button>
         </div>
       </div>
@@ -453,12 +453,12 @@ function CTABanner({ onLogin }) {
   );
 }
 
-/* ═══════════════════════════════ FOOTER MÀU XANH #113366 ═══════════════════════════════ */
+/* ═══════════════════════════════ FOOTER (#113366 NAVY) ═══════════════════════════════ */
 function Footer() {
   const cols = [
-    { title:'SẢN PHẨM', links:[['Tính năng','#features'],['Dashboard','#dashboard'],['Đánh giá','#testimonials']] },
-    { title:'TÀI NGUYÊN', links:[['Hướng dẫn sử dụng','#'],['Yêu cầu hỗ trợ','#'],['Changelog','#']] },
-    { title:'LIÊN HỆ', links:[['WFM Team','#'],['IT Helpdesk','#']] },
+    { title:'PRODUCTS', links:[['Features','#features'],['Dashboard','#dashboard'],['Testimonials','#testimonials']] },
+    { title:'RESOURCES', links:[['User Guide','#'],['Support Request','#'],['Changelog','#']] },
+    { title:'CONTACT', links:[['WFM Team','#'],['IT Helpdesk','#']] },
   ];
   return (
     <footer className="bg-[#113366] text-white">
@@ -469,7 +469,7 @@ function Footer() {
             <span className="font-extrabold text-white text-[17px]">WFM Internal Tool</span>
           </div>
           <p className="text-[13px] text-white/80 leading-relaxed max-w-[240px]">
-            Shopee WFM AI Suite — nền tảng nội bộ cho lập lịch, dự báo và giám sát vận hành contact center.
+            Shopee WFM AI Suite — Internal platform for scheduling, forecasting, and contact center operations monitoring.
           </p>
         </div>
         {cols.map(c => (
@@ -487,7 +487,7 @@ function Footer() {
       </div>
       <div className="border-t border-white/10 py-6 bg-black/10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px]">
-          <span className="text-white/70">© {new Date().getFullYear()} Shopee. Internal tool — không dùng ngoài mục đích công việc.</span>
+          <span className="text-white/70">© {new Date().getFullYear()} Shopee. Internal tool — restricted to corporate use.</span>
           <span className="text-white/70 font-mono font-bold">wfm-internal-tool.onrender.com</span>
         </div>
       </div>
@@ -518,27 +518,27 @@ function AdminModal({ onClose }) {
       <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose}></div>
       <div className="relative bg-white rounded-2xl w-full max-w-md max-h-[82vh] overflow-y-auto shadow-lifted">
         <div className="flex items-center justify-between px-6 py-4.5 border-b border-ink/10">
-          <h3 className="font-extrabold text-[16px] text-ink">Quản lý truy cập</h3>
+          <h3 className="font-extrabold text-[16px] text-ink">Access Control Management</h3>
           <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-canvas text-ink-3"><IconX size={18}/></button>
         </div>
         <div className="p-6">
-          {loading ? <div className="text-center text-[13px] text-ink-3 py-8">Đang tải...</div> : (
+          {loading ? <div className="text-center text-[13px] text-ink-3 py-8">Loading data...</div> : (
             <>
-              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mb-2.5">Yêu cầu chờ duyệt</div>
-              {pending.length === 0 && <div className="text-[12.5px] text-ink-4 mb-5">Không có yêu cầu nào.</div>}
+              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mb-2.5">Pending Requests</div>
+              {pending.length === 0 && <div className="text-[12.5px] text-ink-4 mb-5">No pending requests.</div>}
               {pending.map(e => (
                 <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>approve(e)} className="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-md">Duyệt</button>
-                  <button onClick={()=>deny(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Từ chối</button>
+                  <button onClick={()=>approve(e)} className="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-md">Approve</button>
+                  <button onClick={()=>deny(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Reject</button>
                 </div>
               ))}
-              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mt-6 mb-2.5">Thành viên đã duyệt</div>
-              {members.length === 0 && <div className="text-[12.5px] text-ink-4">Chưa có thành viên nào.</div>}
+              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mt-6 mb-2.5">Authorized Members</div>
+              {members.length === 0 && <div className="text-[12.5px] text-ink-4">No active members found.</div>}
               {members.map(e => (
                 <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>removeMember(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Gỡ quyền</button>
+                  <button onClick={()=>removeMember(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Revoke Access</button>
                 </div>
               ))}
             </>
