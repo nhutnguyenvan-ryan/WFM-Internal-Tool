@@ -409,7 +409,9 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                             className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                             {hasLink
                               ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
-                              : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
+                              : <span 
+                                  style={{ backgroundColor: '#ffede7ff' }}
+                                  className="absolute top-3 right-3 text-[9px] font-extrabold uppercase text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
 
                             {/* 3D ICON IMAGE CONTAINER */}
                             <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center shrink-0 border border-black/5 p-2 shadow-inner">
