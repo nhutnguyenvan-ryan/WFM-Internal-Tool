@@ -85,6 +85,7 @@ const IconSettings = (p) => <Icon {...p}><circle cx="12" cy="12" r="3"/><path d=
 const IconSearch = (p) => <Icon {...p}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></Icon>;
 const IconSparkle = (p) => <Icon {...p}><path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/></Icon>;
 const IconBell = (p) => <Icon {...p}><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></Icon>;
+const IconBook = (p) => <Icon {...p}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></Icon>;
 
 /* ═══════════════════════════════ LOGO BRANDING LOCAL ═══════════════════════════════ */
 const LogoHeader = () => (
@@ -100,7 +101,7 @@ const LogoHeader = () => (
 /* ═══════════════════════════════ DATA WITH 3D ICONS ═══════════════════════════════ */
 const CATEGORIES = [
   { name:'Shift Scheduling', apps:[
-    { name:'AI Shift Scheduling', sub:'Optimize schedules & HC Orders', img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', url:'https://shift-app-online.onrender.com' },
+    { name:'AI Shift Scheduling', sub:'Optimize schedules & HC Orders', img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', url:'https://shift-app-online.onrender.com', guide:'https://script.google.com/a/macros/shopee.com/s/AKfycbyImBqKzBnb7JB7uTcbStzXeoR-574o2_JfJ8BdnUkPLyZPL3ZiqLy3Ah50NujyS5cX/exec' },
   ]},
   { name:'HC Planning', apps:[
     { name:'AI Model Forecast',  sub:'Forecast session volumes', img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', url:'https://script.google.com/a/macros/shopee.com/s/AKfycbxpjKn5efVhH3eS7m04jtnqOTWBeUAtXfEZOA5Z70m9jkQ3actHlqNy8hkQ9lIh18TSNA/exec' },
@@ -403,22 +404,30 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                       const Tag = hasLink ? 'a' : 'div';
                       const extraProps = hasLink ? { href: a.url, target:'_blank', rel:'noopener' } : {};
                       return (
-                        <Tag key={a.name} {...extraProps}
-                          className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
-                          {hasLink
-                            ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
-                            : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
-                          
-                          {/* 3D ICON IMAGE CONTAINER */}
-                          <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center shrink-0 border border-black/5 p-2 shadow-inner">
-                            <img src={a.img} className="w-full h-full object-contain" alt={a.name} />
-                          </div>
+                        <div key={a.name} className="flex flex-col gap-1.5">
+                          <Tag {...extraProps}
+                            className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
+                            {hasLink
+                              ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
+                              : <span className="absolute top-3 right-3 text-[9px] font-extrabold uppercase bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
 
-                          <div className="min-w-0 pr-4">
-                            <div className="font-bold text-[14px] text-ink truncate">{a.name}</div>
-                            <div className="text-[11.5px] text-ink-3 truncate">{a.sub}</div>
-                          </div>
-                        </Tag>
+                            {/* 3D ICON IMAGE CONTAINER */}
+                            <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center shrink-0 border border-black/5 p-2 shadow-inner">
+                              <img src={a.img} className="w-full h-full object-contain" alt={a.name} />
+                            </div>
+
+                            <div className="min-w-0 pr-4">
+                              <div className="font-bold text-[14px] text-ink truncate">{a.name}</div>
+                              <div className="text-[11.5px] text-ink-3 truncate">{a.sub}</div>
+                            </div>
+                          </Tag>
+
+                          {a.guide &&
+                            <a href={a.guide} target="_blank" rel="noopener"
+                              className="inline-flex items-center gap-1.5 self-start bg-white border border-ink/10 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold text-ink-3 hover:text-shopee hover:border-shopee/40 hover:bg-shopee-light transition-colors">
+                              <IconBook size={12}/> User Guide
+                            </a>}
+                        </div>
                       );
                     })}
                   </div>
