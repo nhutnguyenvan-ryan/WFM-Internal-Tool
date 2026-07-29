@@ -70,6 +70,19 @@
   .hero-gradient{
     background: linear-gradient(150deg, #FFF9F6 0%, #FFFFFF 45%, #EFF4FF 100%);
   }
+  /* ── DASHBOARD GRADIENT BACKGROUND ── tông cam-navy nhạt, đồng bộ phong cách Hero,
+     vẫn giữ tương phản đủ cho text tối (--ink) đọc rõ. */
+  .dashboard-gradient{
+    background: linear-gradient(160deg, #FFF1EC 0%, #FDF7F5 30%, #F4F7FC 65%, #EAF0FB 100%);
+    position: relative;
+  }
+  .dashboard-gradient::before{
+    content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(circle at 8% 12%, rgba(238,77,45,.10) 0, transparent 38%),
+      radial-gradient(circle at 92% 85%, rgba(17,51,102,.12) 0, transparent 42%);
+  }
+  .dashboard-gradient > *{ position:relative; z-index:1; }
 
   /* ── 3D TILT INTERACTIVE ── */
   .tilt-3d{ transition: transform .12s ease-out, box-shadow .2s ease; transform-style: preserve-3d; will-change: transform; }
@@ -424,7 +437,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
   })).filter(cat => cat.apps.length), [q]);
 
   return (
-    <section id="dashboard" className="bg-canvas py-20 border-y border-ink/5">
+    <section id="dashboard" className="dashboard-gradient py-20 border-y border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">DASHBOARD</span>
@@ -463,10 +476,10 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               <div className="relative flex-1">
                 <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"/>
                 <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools and applications..."
-                  className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[14px] outline-none focus:border-shopee focus:ring-4 focus:ring-shopee-light transition-all"/>
+                  className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[14px] shadow-soft outline-none focus:border-shopee focus:ring-4 focus:ring-shopee-light transition-all"/>
               </div>
               {auth.role === 'owner' &&
-                <button onClick={onOpenAdmin} className="h-12 px-5 rounded-full border border-ink/10 bg-white text-[13px] font-semibold text-ink-2 hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
+                <button onClick={onOpenAdmin} className="h-12 px-5 rounded-full border border-ink/10 bg-white text-[13px] font-semibold text-ink-2 shadow-soft hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
                   <IconSettings size={16}/> Access Control
                 </button>}
             </div>
@@ -488,7 +501,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                         <div key={a.name} className="flex flex-col gap-1.5">
                           <Tag {...extraProps}
                             style={{ animationDelay: (ai * 0.35) + 's' }}
-                            className={`tilt-3d animate-float relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
+                            className={`tilt-3d animate-float relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 shadow-soft transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                             {hasLink
                               ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
                               : <span 
