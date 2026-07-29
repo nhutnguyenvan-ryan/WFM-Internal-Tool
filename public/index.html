@@ -6,16 +6,13 @@
 <title>WFM Internal Tool — Shopee</title>
 <meta name="description" content="Shopee WFM AI Suite — Automate shift scheduling, headcount forecasting, and contact center operations monitoring with AI.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
 <!-- Tailwind CDN & Config -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        fontFamily: { sans: ["'Segoe UI'", 'system-ui', '-apple-system', 'sans-serif'] },
         colors: {
           shopee: '#EE4D2D',
           'shopee-hover': '#D8431F',
@@ -59,22 +56,7 @@
   }
   .animate-pulse-glow { animation: pulseGlow 1.8s cubic-bezier(0.4,0,0.6,1) infinite; }
 
-  /* ── CUSTOM CURSOR ─────────────────────────────────────────────────────
-     Chấm cam theo dõi chuột, phóng to khi hover phần tử tương tác.
-     Tự tắt trên thiết bị cảm ứng / màn hình hẹp để không cản trở thao tác. */
-  body.has-custom-cursor { cursor: none; }
-  #customCursor{
-    position: fixed; top:0; left:0; width:20px; height:20px; border-radius:50%;
-    border:2px solid #EE4D2D; pointer-events:none; z-index:9999;
-    transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s, border-color .15s, opacity .15s;
-    opacity:0;
-  }
-  #customCursor.active{ opacity:1 }
-  #customCursor.hover{ width:42px; height:42px; background:rgba(238,77,45,.12); border-color:#113366; }
-  @media (max-width:900px), (hover:none){
-    #customCursor{ display:none !important }
-    body.has-custom-cursor{ cursor:auto !important }
-  }
+  /* Custom cursor đã được gỡ bỏ theo yêu cầu — dùng con trỏ mặc định của trình duyệt. */
 
   /* ── PARALLAX BACKDROP (Hero) ── */
   .parallax-layer{
@@ -104,6 +86,30 @@
   @keyframes glowShift{
     0%,100%{ background-position:0% 50% }
     50%{ background-position:100% 50% }
+  }
+  /* ── UNDERLIGHT cho nav links (Features / Dashboard / Testimonials) ──
+     Vệt sáng cam trượt ra từ giữa khi hover, có glow nhẹ phía dưới chữ. */
+  .nav-underlight{ position:relative; padding-bottom:3px; }
+  .nav-underlight::after{
+    content:''; position:absolute; left:50%; bottom:0; width:0; height:2px;
+    background:#EE4D2D; border-radius:2px; transform:translateX(-50%);
+    box-shadow:0 0 8px rgba(238,77,45,.7);
+    transition:width .25s ease;
+  }
+  .nav-underlight:hover::after{ width:100%; }
+
+  /* ── APP DESC TOOLTIP ── hiển thị full text mô tả (bị truncate) khi hover ── */
+  .app-desc-tooltip{
+    position:absolute; left:0; top:calc(100% + 6px); z-index:30;
+    max-width:220px; width:max-content;
+    background:#113366; color:#fff; font-size:11.5px; line-height:1.5;
+    padding:8px 11px; border-radius:8px; box-shadow:0 8px 20px rgba(17,51,102,.25);
+    opacity:0; visibility:hidden; transform:translateY(-4px);
+    transition:opacity .15s ease, transform .15s ease, visibility .15s;
+    pointer-events:none;
+  }
+  .group\/appdesc:hover .app-desc-tooltip{
+    opacity:1; visibility:visible; transform:translateY(0);
   }
 </style>
 </head>
@@ -190,15 +196,15 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
         <a href="#top" className="flex items-center gap-3 shrink-0">
           <LogoHeader />
           <div className="leading-tight">
-            <div className="font-extrabold text-[16px] tracking-tight text-ink">WFM Internal Tool</div>
+            <div className="font-extrabold text-[16px] tracking-tight"><span className="text-navy">WFM</span> <span className="text-shopee">Internal Tool</span></div>
             <div className="text-[11px] text-ink-3"><span className="text-[#EE4D2D] font-extrabold">Shopee</span> · WFM AI Suite</div>
           </div>
         </a>
 
         <nav className="hidden md:flex items-center gap-8 text-[14px] font-semibold text-ink-2">
-          <a href="#features" className="hover:text-shopee transition-colors">Features</a>
-          <a href="#dashboard" className="hover:text-shopee transition-colors">Dashboard</a>
-          <a href="#testimonials" className="hover:text-shopee transition-colors">Testimonials</a>
+          <a href="#features" className="nav-underlight hover:text-shopee transition-colors">Features</a>
+          <a href="#dashboard" className="nav-underlight hover:text-shopee transition-colors">Dashboard</a>
+          <a href="#testimonials" className="nav-underlight hover:text-shopee transition-colors">Testimonials</a>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -277,9 +283,16 @@ function Hero({ onPrimaryCTA }) {
   return (
     <section id="top" className="relative overflow-hidden bg-noise hero-gradient py-12 md:py-20">
       <div id="parallaxLayer" className="parallax-layer"></div>
+
+      {/* FLOATING DECOR ICONS — trang trí, không ảnh hưởng bố cục/luồng dữ liệu */}
+      <span className="hero-float-icon animate-float" style={{top:'14%', left:'6%', animationDuration:'5s'}}>📊</span>
+      <span className="hero-float-icon animate-float" style={{top:'68%', left:'11%', animationDuration:'4.2s', animationDelay:'.6s', fontSize:'26px'}}>⏱️</span>
+      <span className="hero-float-icon animate-float" style={{top:'20%', right:'7%', animationDuration:'4.6s', animationDelay:'.3s'}}>🗓️</span>
+      <span className="hero-float-icon animate-float" style={{top:'70%', right:'10%', animationDuration:'5.4s', animationDelay:'1s', fontSize:'28px'}}>👥</span>
+
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <div className="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
+          <div className="animate-float inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
             <IconSparkle size={14} className="text-shopee"/> AI Suite for Workforce Management
           </div>
           <h1 className="text-3xl md:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
@@ -449,14 +462,15 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                     <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Apps</span>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {cat.apps.map(a => {
+                    {cat.apps.map((a, ai) => {
                       const hasLink = !!a.url;
                       const Tag = hasLink ? 'a' : 'div';
                       const extraProps = hasLink ? { href: a.url, target:'_blank', rel:'noopener' } : {};
                       return (
                         <div key={a.name} className="flex flex-col gap-1.5">
                           <Tag {...extraProps}
-                            className={`tilt-3d relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
+                            style={{ animationDelay: (ai * 0.35) + 's' }}
+                            className={`tilt-3d animate-float relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                             {hasLink
                               ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
                               : <span 
@@ -468,9 +482,11 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                               <img src={a.img} className="w-full h-full object-contain" alt={a.name} />
                             </div>
 
-                            <div className="min-w-0 pr-4">
+                            <div className="min-w-0 pr-4 group/appdesc relative">
                               <div className="font-bold text-[14px] text-ink truncate">{a.name}</div>
-                              <div className="text-[11.5px] text-ink-3 truncate">{a.sub}</div>
+                              <div className="text-[11.5px] text-ink-3 truncate cursor-help">{a.sub}</div>
+                              {/* Tooltip: hiện full text mô tả khi hover, thay vì bị cắt bởi truncate */}
+                              <div className="app-desc-tooltip">{a.sub}</div>
                             </div>
                           </Tag>
 
@@ -694,34 +710,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 <!-- ═══════════════════════════ EFFECTS: Custom Cursor · Parallax · 3D Tilt ═══════════════════════════
      Script thuần JS, tách biệt hoàn toàn khỏi cây React ở trên — chỉ thêm hiệu ứng UI,
      không đụng tới bất kỳ state/logic/API call nào của ứng dụng gốc. -->
-<div id="customCursor"></div>
 <script>
 (function(){
-  var isTouch = window.matchMedia('(hover: none)').matches || window.innerWidth < 900;
-  var cursor = document.getElementById('customCursor');
-
-  if (!isTouch && cursor) {
-    document.body.classList.add('has-custom-cursor');
-    document.addEventListener('mousemove', function(e){
-      cursor.classList.add('active');
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
-    document.addEventListener('mouseleave', function(){ cursor.classList.remove('active'); });
-
-    // Delegate hover-state cho mọi phần tử tương tác được thêm động bởi React (dashboard search, cards...)
-    document.addEventListener('mouseover', function(e){
-      if (e.target.closest('a, button, input, .tilt-3d, [role="button"]')) {
-        cursor.classList.add('hover');
-      }
-    });
-    document.addEventListener('mouseout', function(e){
-      if (e.target.closest('a, button, input, .tilt-3d, [role="button"]')) {
-        cursor.classList.remove('hover');
-      }
-    });
-  }
-
   // ── Parallax cho lớp nền Hero khi cuộn trang ──
   var parallaxTicking = false;
   function updateParallax(){
