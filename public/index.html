@@ -17,9 +17,11 @@
       extend: {
         fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
         colors: {
-          shopee: '#FF6600',
-          'shopee-hover': '#E65C00',
-          'shopee-light': '#FFF2EB',
+          shopee: '#EE4D2D',
+          'shopee-hover': '#D8431F',
+          'shopee-light': '#FFF1ED',
+          navy: '#113366',
+          'navy-light': '#EAF0FB',
           ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
           canvas: '#F9FAFB'
         },
@@ -56,6 +58,53 @@
     70%       { box-shadow: 0 0 0 9px var(--glow-color-end, rgba(239,68,68,0)); }
   }
   .animate-pulse-glow { animation: pulseGlow 1.8s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+  /* ── CUSTOM CURSOR ─────────────────────────────────────────────────────
+     Chấm cam theo dõi chuột, phóng to khi hover phần tử tương tác.
+     Tự tắt trên thiết bị cảm ứng / màn hình hẹp để không cản trở thao tác. */
+  body.has-custom-cursor { cursor: none; }
+  #customCursor{
+    position: fixed; top:0; left:0; width:20px; height:20px; border-radius:50%;
+    border:2px solid #EE4D2D; pointer-events:none; z-index:9999;
+    transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s, border-color .15s, opacity .15s;
+    opacity:0;
+  }
+  #customCursor.active{ opacity:1 }
+  #customCursor.hover{ width:42px; height:42px; background:rgba(238,77,45,.12); border-color:#113366; }
+  @media (max-width:900px), (hover:none){
+    #customCursor{ display:none !important }
+    body.has-custom-cursor{ cursor:auto !important }
+  }
+
+  /* ── PARALLAX BACKDROP (Hero) ── */
+  .parallax-layer{
+    position:absolute; inset:-10% -5%; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(circle at 15% 25%, rgba(238,77,45,.08) 0, transparent 42%),
+      radial-gradient(circle at 85% 20%, rgba(17,51,102,.10) 0, transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(238,77,45,.05) 0, transparent 45%);
+    will-change: transform;
+  }
+  .hero-gradient{
+    background: linear-gradient(150deg, #FFF9F6 0%, #FFFFFF 45%, #EFF4FF 100%);
+  }
+
+  /* ── 3D TILT INTERACTIVE ── */
+  .tilt-3d{ transition: transform .12s ease-out, box-shadow .2s ease; transform-style: preserve-3d; will-change: transform; }
+
+  /* ── GLOW EFFECT nâng cao cho CTA / thẻ highlight ── */
+  .glow-ring{ position:relative; }
+  .glow-ring::before{
+    content:''; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
+    background:linear-gradient(135deg,#EE4D2D,#113366,#EE4D2D);
+    background-size:220% 220%; opacity:0; filter:blur(10px);
+    transition:opacity .25s; animation: glowShift 4s ease infinite;
+  }
+  .glow-ring:hover::before{ opacity:.55 }
+  @keyframes glowShift{
+    0%,100%{ background-position:0% 50% }
+    50%{ background-position:100% 50% }
+  }
 </style>
 </head>
 <body class="font-sans text-ink antialiased">
@@ -142,7 +191,7 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
           <LogoHeader />
           <div className="leading-tight">
             <div className="font-extrabold text-[16px] tracking-tight text-ink">WFM Internal Tool</div>
-            <div className="text-[11px] text-ink-3"><span className="text-[#FF6600] font-extrabold">Shopee</span> · WFM AI Suite</div>
+            <div className="text-[11px] text-ink-3"><span className="text-[#EE4D2D] font-extrabold">Shopee</span> · WFM AI Suite</div>
           </div>
         </a>
 
@@ -196,7 +245,7 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
               </button>
             </>
           ) : (
-            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-colors">
+            <button onClick={onLogin} className="glow-ring inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-colors">
               Sign In <IconArrowRight size={15}/>
             </button>
           )}
@@ -226,14 +275,15 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
 /* ═══════════════════════════════ HERO SECTION ═══════════════════════════════ */
 function Hero({ onPrimaryCTA }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-noise py-12 md:py-20">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
+    <section id="top" className="relative overflow-hidden bg-noise hero-gradient py-12 md:py-20">
+      <div id="parallaxLayer" className="parallax-layer"></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
             <IconSparkle size={14} className="text-shopee"/> AI Suite for Workforce Management
           </div>
           <h1 className="text-3xl md:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
-            Empower WFM operations <span className="text-[#FF6600]">smarter</span> with data, not guesswork
+            Empower WFM operations <span className="text-[#EE4D2D]">smarter</span> with data, not guesswork
           </h1>
           <p className="mt-5 text-[16px] text-ink-3 leading-relaxed max-w-lg">
             A unified platform for shift scheduling, headcount forecasting, and contact center operations monitoring—built exclusively for Shopee, powered by AI.
@@ -260,7 +310,7 @@ function Hero({ onPrimaryCTA }) {
 
         {/* FLOATING CARD WITH 3D ICONS */}
         <div className="relative">
-          <div className="bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
+          <div className="tilt-3d bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
             <div className="flex items-center justify-between border-b border-ink/5 pb-3 mb-5">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-shopee"></span>
@@ -312,14 +362,14 @@ function Features() {
   return (
     <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">CORE FEATURES</span>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">CORE FEATURES</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Everything your WFM team needs in one place</h2>
         <p className="mt-3 text-ink-3 text-[15px]">From scheduling to forecasting and operational monitoring—AI-automated to eliminate manual errors.</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {FEATURES.map((f, i) => {
           return (
-            <div key={i} className="bg-white border border-ink/10 rounded-2xl p-8 hover:shadow-card hover:-translate-y-1 transition-all">
+            <div key={i} className="tilt-3d bg-white border border-ink/10 rounded-2xl p-8 hover:shadow-card transition-all">
               <div className="w-16 h-16 rounded-2xl bg-canvas flex items-center justify-center mb-6 p-3 border border-black/5 shadow-inner">
                 <img src={f.img} className="w-full h-full object-contain" alt={f.title}/>
               </div>
@@ -346,7 +396,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
     <section id="dashboard" className="bg-canvas py-20 border-y border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">DASHBOARD</span>
+          <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">DASHBOARD</span>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Access Applications</h2>
           <p className="mt-3 text-ink-3 text-[15px]">Exclusively available for authorized @shopee.com accounts.</p>
         </div>
@@ -394,7 +444,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               {filtered.map(cat => (
                 <div key={cat.name}>
                   <div className="flex items-center gap-2.5 mb-4">
-                    <span className="w-1.5 h-5 rounded-sm bg-[#FF6600]"></span>
+                    <span className="w-1.5 h-5 rounded-sm bg-[#EE4D2D]"></span>
                     <h3 className="font-extrabold text-[14px] tracking-wide uppercase text-ink">{cat.name}</h3>
                     <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Apps</span>
                   </div>
@@ -406,7 +456,7 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                       return (
                         <div key={a.name} className="flex flex-col gap-1.5">
                           <Tag {...extraProps}
-                            className={`relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:-translate-y-1 hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
+                            className={`tilt-3d relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                             {hasLink
                               ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
                               : <span 
@@ -448,7 +498,7 @@ function Testimonials() {
   return (
     <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[12px] font-bold tracking-widest text-[#FF6600] uppercase mb-3">INTERNAL FEEDBACK</span>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">INTERNAL FEEDBACK</span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">What our WFM team says</h2>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
@@ -639,6 +689,71 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+<!-- ═══════════════════════════ EFFECTS: Custom Cursor · Parallax · 3D Tilt ═══════════════════════════
+     Script thuần JS, tách biệt hoàn toàn khỏi cây React ở trên — chỉ thêm hiệu ứng UI,
+     không đụng tới bất kỳ state/logic/API call nào của ứng dụng gốc. -->
+<div id="customCursor"></div>
+<script>
+(function(){
+  var isTouch = window.matchMedia('(hover: none)').matches || window.innerWidth < 900;
+  var cursor = document.getElementById('customCursor');
+
+  if (!isTouch && cursor) {
+    document.body.classList.add('has-custom-cursor');
+    document.addEventListener('mousemove', function(e){
+      cursor.classList.add('active');
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', function(){ cursor.classList.remove('active'); });
+
+    // Delegate hover-state cho mọi phần tử tương tác được thêm động bởi React (dashboard search, cards...)
+    document.addEventListener('mouseover', function(e){
+      if (e.target.closest('a, button, input, .tilt-3d, [role="button"]')) {
+        cursor.classList.add('hover');
+      }
+    });
+    document.addEventListener('mouseout', function(e){
+      if (e.target.closest('a, button, input, .tilt-3d, [role="button"]')) {
+        cursor.classList.remove('hover');
+      }
+    });
+  }
+
+  // ── Parallax cho lớp nền Hero khi cuộn trang ──
+  var parallaxTicking = false;
+  function updateParallax(){
+    var layer = document.getElementById('parallaxLayer');
+    if (layer) {
+      var y = window.scrollY || 0;
+      layer.style.transform = 'translateY(' + (y * 0.25) + 'px)';
+    }
+    parallaxTicking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!parallaxTicking) { requestAnimationFrame(updateParallax); parallaxTicking = true; }
+  }, { passive: true });
+
+  // ── 3D tilt hover cho mọi phần tử .tilt-3d (delegate vì React render động) ──
+  document.addEventListener('mousemove', function(e){
+    var card = e.target.closest && e.target.closest('.tilt-3d');
+    if (!card) return;
+    var r = card.getBoundingClientRect();
+    var px = (e.clientX - r.left) / r.width;
+    var py = (e.clientY - r.top) / r.height;
+    var rx = (0.5 - py) * 8;
+    var ry = (px - 0.5) * 8;
+    card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-3px)';
+  });
+  document.addEventListener('mouseout', function(e){
+    var card = e.target.closest && e.target.closest('.tilt-3d');
+    if (card && (!e.relatedTarget || !card.contains(e.relatedTarget))) {
+      card.style.transform = '';
+    }
+  });
+})();
 </script>
 </body>
 </html>
