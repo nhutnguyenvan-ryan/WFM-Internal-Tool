@@ -12,20 +12,20 @@
   tailwind.config = {
     theme: {
       extend: {
-        fontFamily: { sans: ["'Plus Jakarta Sans'", "'Segoe UI'", 'system-ui', '-apple-system', 'sans-serif'] },
+        fontFamily: { sans: ["'Segoe UI'", 'system-ui', '-apple-system', 'sans-serif'] },
         colors: {
           shopee: '#EE4D2D',
           'shopee-hover': '#D8431F',
           'shopee-light': '#FFF1ED',
           navy: '#113366',
           'navy-light': '#EAF0FB',
-          ink: { DEFAULT:'#0F172A', 2:'#334155', 3:'#64748B', 4:'#94A3B8' },
-          canvas: '#F8FAFC'
+          ink: { DEFAULT:'#0F1222', 2:'#3D4257', 3:'#7A7F99', 4:'#A7ABC2' },
+          canvas: '#F9FAFB'
         },
         boxShadow: {
-          soft: '0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04)',
-          card: '0 10px 30px -5px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.02)',
-          lifted: '0 20px 40px -15px rgba(15, 23, 42, 0.08), 0 0 15px 0 rgba(15, 23, 42, 0.03)'
+          soft: '0 1px 2px rgba(15,18,34,.05), 0 1px 1px rgba(15,18,34,.04)',
+          card: '0 8px 24px rgba(15,18,34,.08)',
+          lifted: '0 20px 60px rgba(15,18,34,.16)'
         }
       }
     }
@@ -37,93 +37,86 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js" crossorigin></script>
 
 <style>
-  body { background:#F8FAFC; margin:0; padding:0; color:#0F172A; }
-  
-  /* Họa tiết lưới mờ công nghệ cao thay cho noise hạt rải rác */
-  .bg-noise { 
-    background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px), 
-                      linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px); 
-    background-size: 32px 32px; 
-  }
-  
+  body { background:#F9FAFB; margin:0; padding:0; }
+  .bg-noise { background-image: radial-gradient(circle at 1px 1px, rgba(15,18,34,.05) 1px, transparent 0); background-size: 22px 22px; }
   ::-webkit-scrollbar { width:6px; height:6px }
-  ::-webkit-scrollbar-thumb { background:#CBD5E1; border-radius:4px }
+  ::-webkit-scrollbar-thumb { background:#DDE1ED; border-radius:4px }
   
   @keyframes floatSlow {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
+    50% { transform: translateY(-8px); }
   }
-  .animate-float { animation: floatSlow 5s ease-in-out infinite; }
+  .animate-float { animation: floatSlow 4s ease-in-out infinite; }
 
-  /* Glow pulse dùng chung cho toàn tool */
+  /* Glow pulse dùng chung cho toàn tool — badge thông báo, CTA nổi bật, chỉ báo "live"...
+     Mặc định màu đỏ (cảnh báo/thông báo mới); truyền --glow-color qua style inline để đổi màu khi cần. */
   @keyframes pulseGlow {
-    0%, 100%  { box-shadow: 0 0 0 0 var(--glow-color, rgba(239,68,68,.4)); }
-    70%       { box-shadow: 0 0 0 8px var(--glow-color-end, rgba(239,68,68,0)); }
+    0%, 100%  { box-shadow: 0 0 0 0 var(--glow-color, rgba(239,68,68,.55)); }
+    70%       { box-shadow: 0 0 0 9px var(--glow-color-end, rgba(239,68,68,0)); }
   }
-  .animate-pulse-glow { animation: pulseGlow 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+  .animate-pulse-glow { animation: pulseGlow 1.8s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+  /* Custom cursor đã được gỡ bỏ theo yêu cầu — dùng con trỏ mặc định của trình duyệt. */
 
   /* ── PARALLAX BACKDROP (Hero) ── */
   .parallax-layer{
     position:absolute; inset:-10% -5%; pointer-events:none; z-index:0;
     background-image:
-      radial-gradient(circle at 20% 20%, rgba(238,77,45,.06) 0, transparent 40%),
-      radial-gradient(circle at 80% 30%, rgba(17,51,102,.07) 0, transparent 45%),
-      radial-gradient(circle at 50% 80%, rgba(238,77,45,.04) 0, transparent 50%);
+      radial-gradient(circle at 15% 25%, rgba(238,77,45,.08) 0, transparent 42%),
+      radial-gradient(circle at 85% 20%, rgba(17,51,102,.10) 0, transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(238,77,45,.05) 0, transparent 45%);
     will-change: transform;
   }
   .hero-gradient{
-    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    background: linear-gradient(150deg, #FFF9F6 0%, #FFFFFF 45%, #EFF4FF 100%);
   }
-
-  /* ── DASHBOARD GRADIENT BACKGROUND ── */
+  /* ── DASHBOARD GRADIENT BACKGROUND ── tông cam-navy nhạt, đồng bộ phong cách Hero,
+     vẫn giữ tương phản đủ cho text tối (--ink) đọc rõ. */
   .dashboard-gradient{
-    background: #F8FAFC;
+    background: linear-gradient(160deg, #FFF1EC 0%, #FDF7F5 30%, #F4F7FC 65%, #EAF0FB 100%);
     position: relative;
   }
   .dashboard-gradient::before{
     content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
     background-image:
-      radial-gradient(circle at 10% 15%, rgba(238,77,45,.04) 0, transparent 40%),
-      radial-gradient(circle at 90% 85%, rgba(17,51,102,.05) 0, transparent 40%);
+      radial-gradient(circle at 8% 12%, rgba(238,77,45,.10) 0, transparent 38%),
+      radial-gradient(circle at 92% 85%, rgba(17,51,102,.12) 0, transparent 42%);
   }
   .dashboard-gradient > *{ position:relative; z-index:1; }
 
-  /* ── TILT & ELEVATION INTERACTIVE ── */
-  .tilt-3d { 
-    transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s cubic-bezier(0.16, 1, 0.3, 1), border-color .2s ease; 
-    will-change: transform; 
-  }
+  /* ── 3D TILT INTERACTIVE ── */
+  .tilt-3d{ transition: transform .12s ease-out, box-shadow .2s ease; transform-style: preserve-3d; will-change: transform; }
 
   /* ── GLOW EFFECT nâng cao cho CTA / thẻ highlight ── */
   .glow-ring{ position:relative; }
   .glow-ring::before{
-    content:''; position:absolute; inset:-1px; border-radius:inherit; z-index:-1;
+    content:''; position:absolute; inset:-2px; border-radius:inherit; z-index:-1;
     background:linear-gradient(135deg,#EE4D2D,#113366,#EE4D2D);
-    background-size:200% 200%; opacity:0; filter:blur(8px);
+    background-size:220% 220%; opacity:0; filter:blur(10px);
     transition:opacity .25s; animation: glowShift 4s ease infinite;
   }
-  .glow-ring:hover::before{ opacity:.45 }
+  .glow-ring:hover::before{ opacity:.55 }
   @keyframes glowShift{
     0%,100%{ background-position:0% 50% }
     50%{ background-position:100% 50% }
   }
-
-  /* ── UNDERLIGHT cho nav links ── */
+  /* ── UNDERLIGHT cho nav links (Features / Dashboard / Testimonials) ──
+     Vệt sáng cam trượt ra từ giữa khi hover, có glow nhẹ phía dưới chữ. */
   .nav-underlight{ position:relative; padding-bottom:3px; }
   .nav-underlight::after{
     content:''; position:absolute; left:50%; bottom:0; width:0; height:2px;
     background:#EE4D2D; border-radius:2px; transform:translateX(-50%);
-    box-shadow:0 0 6px rgba(238,77,45,.5);
+    box-shadow:0 0 8px rgba(238,77,45,.7);
     transition:width .25s ease;
   }
   .nav-underlight:hover::after{ width:100%; }
 
-  /* ── APP DESC TOOLTIP ── */
+  /* ── APP DESC TOOLTIP ── hiển thị full text mô tả (bị truncate) khi hover ── */
   .app-desc-tooltip{
-    position:absolute; left:0; top:calc(100% + 8px); z-index:30;
-    max-width:240px; width:max-content;
-    background:#0F172A; color:#fff; font-size:11.5px; line-height:1.5;
-    padding:8px 12px; border-radius:8px; box-shadow:0 10px 25px -5px rgba(0,0,0,0.12);
+    position:absolute; left:0; top:calc(100% + 6px); z-index:30;
+    max-width:220px; width:max-content;
+    background:#113366; color:#fff; font-size:11.5px; line-height:1.5;
+    padding:8px 11px; border-radius:8px; box-shadow:0 8px 20px rgba(17,51,102,.25);
     opacity:0; visibility:hidden; transform:translateY(-4px);
     transition:opacity .15s ease, transform .15s ease, visibility .15s;
     pointer-events:none;
@@ -131,9 +124,13 @@
   .group\/appdesc:hover .app-desc-tooltip{
     opacity:1; visibility:visible; transform:translateY(0);
   }
-
-  /* Ẩn các icon emoji lơ lửng để giao diện trông sang trọng, đạt chuẩn B2B SaaS Enterprise */
-  .hero-float-icon { display: none !important; }
+  /* ── HERO FLOATING DECOR ICONS ── */
+  .hero-float-icon{
+    position:absolute; z-index:1; font-size:32px; opacity:.75;
+    filter:drop-shadow(0 6px 14px rgba(17,51,102,.16));
+    pointer-events:none; user-select:none;
+  }
+  @media (max-width:900px){ .hero-float-icon{ display:none; } }
 </style>
 </head>
 <body class="font-sans text-ink antialiased">
@@ -214,17 +211,17 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
   const [open, setOpen] = useState(false);
   const [showTip, setShowTip] = useState(false);
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm transition-all">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ink/10 shadow-sm">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3 shrink-0 group">
+        <a href="#top" className="flex items-center gap-3 shrink-0">
           <LogoHeader />
           <div className="leading-tight">
-            <div className="font-extrabold text-[15px] tracking-tight"><span className="text-navy">WFM</span> <span className="text-shopee">Internal Tool</span></div>
+            <div className="font-extrabold text-[16px] tracking-tight"><span className="text-navy">WFM</span> <span className="text-shopee">Internal Tool</span></div>
             <div className="text-[11px] text-ink-3"><span className="text-[#EE4D2D] font-extrabold">Shopee</span> · WFM AI Suite</div>
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-[13.5px] font-semibold text-ink-2">
+        <nav className="hidden md:flex items-center gap-8 text-[14px] font-semibold text-ink-2">
           <a href="#features" className="nav-underlight hover:text-shopee transition-colors">Features</a>
           <a href="#dashboard" className="nav-underlight hover:text-shopee transition-colors">Dashboard</a>
           <a href="#testimonials" className="nav-underlight hover:text-shopee transition-colors">Testimonials</a>
@@ -237,22 +234,22 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
                 <div className="relative"
                      onMouseEnter={()=>setShowTip(true)}
                      onMouseLeave={()=>setShowTip(false)}>
-                  <button onClick={onOpenAdmin} className="w-9 h-9 rounded-xl border border-slate-200/80 flex items-center justify-center text-ink-3 hover:bg-canvas hover:text-shopee transition-colors relative" title="Yêu cầu truy cập">
+                  <button onClick={onOpenAdmin} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas hover:text-shopee transition-colors relative" title="Yêu cầu truy cập">
                     <IconBell size={16}/>
                     {pending.length > 0 &&
-                      <span className="absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-red-500 text-white text-[9px] font-extrabold flex items-center justify-center leading-none animate-pulse-glow">
+                      <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 rounded-full bg-red-500 text-white text-[9px] font-extrabold flex items-center justify-center leading-none animate-pulse-glow">
                         {pending.length > 9 ? '9+' : pending.length}
                       </span>}
                   </button>
                   {showTip &&
-                    <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-slate-200/80 rounded-2xl shadow-lifted p-3.5 z-50 text-left">
+                    <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-ink/10 rounded-xl shadow-lifted p-3 z-50 text-left">
                       <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-ink-3 mb-2">
                         {pending.length > 0 ? `${pending.length} yêu cầu đang chờ duyệt` : 'Không có yêu cầu nào'}
                       </div>
                       {pending.length > 0 &&
                         <div className="flex flex-col gap-1 max-h-40 overflow-y-auto">
                           {pending.slice(0,5).map(e => (
-                            <div key={e} className="text-[12px] text-ink-2 truncate bg-canvas rounded-lg px-2.5 py-1.5">{e}</div>
+                            <div key={e} className="text-[12px] text-ink-2 truncate bg-canvas rounded-md px-2 py-1">{e}</div>
                           ))}
                           {pending.length > 5 && <div className="text-[11px] text-ink-3 px-2 pt-1">+{pending.length - 5} khác...</div>}
                         </div>}
@@ -260,21 +257,21 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
                     </div>}
                 </div>}
               {auth.role === 'owner' &&
-                <button onClick={onOpenAdmin} className="w-9 h-9 rounded-xl border border-slate-200/80 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Access Control">
+                <button onClick={onOpenAdmin} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Access Control">
                   <IconSettings size={16}/>
                 </button>}
-              <div className="flex items-center gap-2 bg-canvas border border-slate-200/80 rounded-full pl-1.5 pr-3.5 py-1">
-                <div className="w-6 h-6 rounded-full bg-shopee-light text-shopee text-[10px] font-extrabold flex items-center justify-center">
+              <div className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-full pl-1 pr-3 py-1">
+                <div className="w-7 h-7 rounded-full bg-shopee-light text-shopee text-[11px] font-extrabold flex items-center justify-center">
                   {auth.user?.email ? auth.user.email.slice(0,2).toUpperCase() : 'U'}
                 </div>
                 <span className="text-[12px] text-ink-2 font-medium">{auth.user?.email}</span>
               </div>
-              <button onClick={onLogout} className="w-9 h-9 rounded-xl border border-slate-200/80 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Log Out">
+              <button onClick={onLogout} className="w-9 h-9 rounded-lg border border-ink/10 flex items-center justify-center text-ink-3 hover:bg-canvas transition-colors" title="Log Out">
                 <IconLogout size={16}/>
               </button>
             </>
           ) : (
-            <button onClick={onLogin} className="glow-ring inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-all">
+            <button onClick={onLogin} className="glow-ring inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white text-[13.5px] font-bold px-5 py-2.5 rounded-xl shadow-soft transition-colors">
               Sign In <IconArrowRight size={15}/>
             </button>
           )}
@@ -286,7 +283,7 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-slate-100 bg-white/95 backdrop-blur px-5 py-4 flex flex-col gap-3">
+        <div className="md:hidden border-t border-ink/5 bg-white px-5 py-4 flex flex-col gap-3">
           <a href="#features" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Features</a>
           <a href="#dashboard" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Dashboard</a>
           <a href="#testimonials" onClick={()=>setOpen(false)} className="text-[14px] font-medium text-ink-2">Testimonials</a>
@@ -304,35 +301,52 @@ function Navbar({ auth, onLogin, onLogout, onOpenAdmin, pending = [] }) {
 /* ═══════════════════════════════ HERO SECTION ═══════════════════════════════ */
 function Hero({ onPrimaryCTA }) {
   return (
-    <section id="top" className="relative overflow-hidden bg-noise hero-gradient py-16 md:py-24">
+    <section id="top" className="relative overflow-hidden bg-noise hero-gradient py-12 md:py-20">
       <div id="parallaxLayer" className="parallax-layer"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* FLOATING DECOR ICONS — rải vào vùng trống quanh Hero, né hẳn vùng chữ (cột trái, x:0-48%, y:4-96%)
+          và floating card (cột phải, x:52-100%, y:22-92%). Chỉ đặt tại viền ngoài + dải trên/dưới cột phải. */}
+      <span className="hero-float-icon animate-float" style={{top:'4%', left:'3%', animationDuration:'5s'}}>📊</span>
+      <span className="hero-float-icon animate-float" style={{top:'50%', left:'1%', animationDuration:'4.2s', animationDelay:'.6s', fontSize:'24px'}}>⏱️</span>
+      <span className="hero-float-icon animate-float" style={{top:'96%', left:'4%', animationDuration:'5.6s', animationDelay:'1.2s', fontSize:'22px'}}>🗓️</span>
+      <span className="hero-float-icon animate-float" style={{top:'97%', left:'22%', animationDuration:'4.8s', animationDelay:'.4s', fontSize:'20px'}}>👥</span>
+
+      <span className="hero-float-icon animate-float" style={{top:'5%', right:'6%', animationDuration:'4.6s', animationDelay:'.3s', fontSize:'26px'}}>📡</span>
+      <span className="hero-float-icon animate-float" style={{top:'12%', right:'24%', animationDuration:'5.3s', animationDelay:'.9s', fontSize:'20px'}}>🔍</span>
+      <span className="hero-float-icon animate-float" style={{top:'96%', right:'26%', animationDuration:'5.2s', animationDelay:'1.4s', fontSize:'22px'}}>💯</span>
+      <span className="hero-float-icon animate-float" style={{top:'96%', right:'6%', animationDuration:'4.9s', animationDelay:'.7s', fontSize:'24px'}}>🛡️</span>
+      <span className="hero-float-icon animate-float" style={{top:'50%', right:'1%', animationDuration:'5.8s', animationDelay:'1.6s', fontSize:'24px'}}>🌟</span>
+
+      <span className="hero-float-icon animate-float" style={{top:'2%', left:'26%', animationDuration:'5.1s', animationDelay:'1s', fontSize:'20px'}}>🎯</span>
+      <span className="hero-float-icon animate-float" style={{top:'96%', left:'44%', animationDuration:'4.5s', animationDelay:'.5s', fontSize:'20px'}}>🚨</span>
+      <span className="hero-float-icon animate-float" style={{top:'18%', right:'4%', animationDuration:'5.5s', animationDelay:'.2s', fontSize:'18px'}}>✦</span>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <div className="inline-flex items-center gap-2 bg-slate-100/80 border border-slate-200/80 rounded-full px-3.5 py-1.5 text-[12px] font-semibold text-ink-2 shadow-sm mb-6">
+          <div className="animate-float inline-flex items-center gap-2 bg-white border border-ink/10 rounded-full px-4 py-1.5 text-[12px] font-semibold text-ink-2 shadow-soft mb-6">
             <IconSparkle size={14} className="text-shopee"/> AI Suite for Workforce Management
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
+          <h1 className="text-3xl md:text-[3.25rem] font-extrabold leading-[1.15] tracking-tight text-ink">
             Empower WFM operations <span className="text-[#EE4D2D]">smarter</span> with data, not guesswork
           </h1>
-          <p className="mt-5 text-[15.5px] text-ink-3 leading-relaxed max-w-lg">
+          <p className="mt-5 text-[16px] text-ink-3 leading-relaxed max-w-lg">
             A unified platform for shift scheduling, headcount forecasting, and contact center operations monitoring—built exclusively for Shopee, powered by AI.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <button 
               onClick={onPrimaryCTA} 
-              className="inline-flex items-center gap-2.5 bg-shopee hover:bg-shopee-hover text-white font-extrabold text-[14.5px] px-6.5 py-3.5 rounded-xl shadow-card transition-all hover:-translate-y-0.5 cursor-pointer">
-              Go to Dashboard <IconArrowRight size={17}/>
+              className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white font-extrabold text-[15px] px-7 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5 cursor-pointer">
+              Go to Dashboard <IconArrowRight size={18}/>
             </button>
             <a 
               href="#features" 
-              className="inline-flex items-center gap-2 bg-white border border-slate-200 text-ink-2 font-bold text-[14.5px] px-6 py-3.5 rounded-xl hover:bg-canvas transition-colors shadow-sm">
+              className="inline-flex items-center gap-2 bg-white border border-ink/15 text-ink-2 font-bold text-[15px] px-6 py-4 rounded-xl hover:bg-canvas transition-colors">
               Explore Features
             </a>
           </div>
 
-          <div className="mt-8 flex items-center gap-6 text-[12.5px] font-semibold text-ink-3">
+          <div className="mt-8 flex items-center gap-5 text-[12.5px] font-medium text-ink-3">
             <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Free internal access</div>
             <div className="flex items-center gap-1.5"><IconCheck size={16} className="text-shopee"/> Restricted to @shopee.com domain</div>
           </div>
@@ -340,45 +354,45 @@ function Hero({ onPrimaryCTA }) {
 
         {/* FLOATING CARD WITH 3D ICONS */}
         <div className="relative">
-          <div className="tilt-3d bg-white/90 backdrop-blur border border-slate-200/80 rounded-2xl shadow-lifted p-6">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3.5 mb-5">
-              <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+          <div className="tilt-3d bg-white border border-ink/10 rounded-2xl shadow-lifted p-6 animate-float">
+            <div className="flex items-center justify-between border-b border-ink/5 pb-3 mb-5">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-shopee"></span>
+                <span className="w-3 h-3 rounded-full bg-blue-500"></span>
+                <span className="w-3 h-3 rounded-full bg-emerald-500"></span>
               </div>
-              <span className="text-[11px] text-slate-400 font-mono font-medium">wfm-internal-tool.onrender.com</span>
+              <span className="text-[11px] text-ink-4 font-mono">wfm-internal-tool.onrender.com</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-3.5">
+            <div className="grid grid-cols-2 gap-4">
               {[
-                { img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', label:'Shift Scheduling', bg:'bg-shopee-light/60' },
-                { img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', label:'HC Forecast', bg:'bg-blue-50/60' },
-                { img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', label:'Compliance Alert', bg:'bg-emerald-50/60' },
-                { img: 'https://cdn-icons-png.flaticon.com/512/4712/4712035.png', label:'WFM Agent', bg:'bg-purple-50/60' },
+                { img: 'https://cdn-icons-png.flaticon.com/512/2693/2693507.png', label:'Shift Scheduling', bg:'bg-shopee-light' },
+                { img: 'https://cdn-icons-png.flaticon.com/512/3588/3588658.png', label:'HC Forecast', bg:'bg-blue-50' },
+                { img: 'https://cdn-icons-png.flaticon.com/512/2913/2913133.png', label:'Compliance Alert', bg:'bg-emerald-50' },
+                { img: 'https://cdn-icons-png.flaticon.com/512/4712/4712035.png', label:'WFM Agent', bg:'bg-purple-50' },
               ].map((c,i)=>{
                 return (
-                  <div key={i} className={`${c.bg} rounded-xl p-3.5 flex flex-col items-center text-center gap-2 border border-slate-100`}>
-                    <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center p-2 shadow-sm">
+                  <div key={i} className={`${c.bg} rounded-xl p-4 flex flex-col items-center text-center gap-2.5 border border-black/5`}>
+                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center p-2 shadow-sm">
                       <img src={c.img} className="w-full h-full object-contain" alt={c.label}/>
                     </div>
-                    <span className="text-[12px] font-bold text-ink">{c.label}</span>
+                    <span className="text-[12.5px] font-bold text-ink">{c.label}</span>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-4 bg-shopee-light/50 border border-shopee/20 rounded-xl p-3.5 flex items-center justify-between">
+            <div className="mt-4 bg-shopee-light border border-shopee/20 rounded-xl p-3.5 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-shopee flex items-center justify-center text-white shadow-sm">
-                  <IconSparkle size={20} />
+                <div className="w-10 h-10 rounded-lg bg-shopee flex items-center justify-center text-white shadow-sm">
+                  <IconSparkle size={22} />
                 </div>
                 <div>
-                  <div className="text-[10.5px] text-ink-3 font-semibold">Efficiency Boost</div>
-                  <div className="text-[12px] font-bold text-ink">Automated Scheduling</div>
+                  <div className="text-[11px] text-ink-3 font-semibold">Efficiency Boost</div>
+                  <div className="text-[12.5px] font-bold text-ink">Automated Scheduling</div>
                 </div>
               </div>
-              <span className="text-xl font-extrabold text-shopee">−80%</span>
+              <span className="text-2xl font-extrabold text-shopee">−80%</span>
             </div>
           </div>
         </div>
@@ -392,19 +406,19 @@ function Features() {
   return (
     <section id="features" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[11px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-2">CORE FEATURES</span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-ink">Everything your WFM team needs in one place</h2>
-        <p className="mt-2.5 text-ink-3 text-[14.5px]">From scheduling to forecasting and operational monitoring—AI-automated to eliminate manual errors.</p>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">CORE FEATURES</span>
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Everything your WFM team needs in one place</h2>
+        <p className="mt-3 text-ink-3 text-[15px]">From scheduling to forecasting and operational monitoring—AI-automated to eliminate manual errors.</p>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {FEATURES.map((f, i) => {
           return (
-            <div key={i} className="tilt-3d bg-white border border-slate-200/80 rounded-2xl p-7 hover:border-slate-300 hover:shadow-card transition-all">
-              <div className="w-14 h-14 rounded-xl bg-canvas flex items-center justify-center mb-5 p-2.5 border border-slate-200/60 shadow-sm">
+            <div key={i} className="tilt-3d bg-white border border-ink/10 rounded-2xl p-8 hover:shadow-card transition-all">
+              <div className="w-16 h-16 rounded-2xl bg-canvas flex items-center justify-center mb-6 p-3 border border-black/5 shadow-inner">
                 <img src={f.img} className="w-full h-full object-contain" alt={f.title}/>
               </div>
-              <h3 className="font-extrabold text-[17px] text-ink mb-2.5">{f.title}</h3>
-              <p className="text-[13.5px] text-ink-3 leading-relaxed">{f.desc}</p>
+              <h3 className="font-extrabold text-[18px] text-ink mb-3">{f.title}</h3>
+              <p className="text-[14px] text-ink-3 leading-relaxed">{f.desc}</p>
             </div>
           );
         })}
@@ -423,12 +437,12 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
   })).filter(cat => cat.apps.length), [q]);
 
   return (
-    <section id="dashboard" className="dashboard-gradient py-20 border-y border-slate-200/60">
+    <section id="dashboard" className="dashboard-gradient py-20 border-y border-ink/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="inline-block text-[11px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-2">DASHBOARD</span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-ink">Access Applications</h2>
-          <p className="mt-2.5 text-ink-3 text-[14.5px]">Exclusively available for authorized @shopee.com accounts.</p>
+          <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">DASHBOARD</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">Access Applications</h2>
+          <p className="mt-3 text-ink-3 text-[15px]">Exclusively available for authorized @shopee.com accounts.</p>
         </div>
 
         {auth.role === 'loading' && (
@@ -436,22 +450,22 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
         )}
 
         {auth.role !== 'loading' && !auth.user && (
-          <div className="max-w-md mx-auto bg-white border border-slate-200/80 rounded-2xl shadow-card p-8 sm:p-10 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-shopee-light flex items-center justify-center mx-auto mb-5 text-shopee">
-              <IconLock size={28} />
+          <div className="max-w-md mx-auto bg-white border border-ink/10 rounded-2xl shadow-card p-10 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-shopee-light flex items-center justify-center mx-auto mb-5 text-shopee">
+              <IconLock size={32} />
             </div>
-            <h3 className="font-bold text-[17px] text-ink mb-2">Sign in to view Dashboard</h3>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Sign in to view Dashboard</h3>
             <p className="text-[13.5px] text-ink-3 mb-6">Log in with your Google @shopee.com account to access the application hub.</p>
-            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white font-bold text-[14px] px-6 py-3 rounded-xl transition-colors">
+            <button onClick={onLogin} className="inline-flex items-center gap-2 bg-shopee hover:bg-shopee-hover text-white font-bold px-7 py-3.5 rounded-xl transition-colors">
               Sign in with Google <IconArrowRight size={16}/>
             </button>
           </div>
         )}
 
         {auth.role === 'none' && auth.user && (
-          <div className="max-w-md mx-auto bg-white border border-slate-200/80 rounded-2xl shadow-card p-8 sm:p-10 text-center">
-            <span className="inline-block bg-shopee-light text-shopee text-[10px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Pending Approval</span>
-            <h3 className="font-bold text-[17px] text-ink mb-2">Access Request Submitted</h3>
+          <div className="max-w-md mx-auto bg-white border border-ink/10 rounded-2xl shadow-card p-10 text-center">
+            <span className="inline-block bg-shopee-light text-shopee text-[11px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Pending Approval</span>
+            <h3 className="font-bold text-[18px] text-ink mb-2">Access Request Submitted</h3>
             <p className="text-[13.5px] text-ink-3">Account <strong className="text-ink-2">{auth.user.email}</strong> has not been authorized yet. Please contact an Administrator for access.</p>
           </div>
         )}
@@ -462,10 +476,10 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               <div className="relative flex-1">
                 <IconSearch size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-4"/>
                 <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search tools and applications..."
-                  className="w-full h-11 rounded-xl border border-slate-200/80 bg-white pl-11 pr-4 text-[13.5px] shadow-sm outline-none focus:border-shopee focus:ring-2 focus:ring-shopee-light transition-all"/>
+                  className="w-full h-12 rounded-full border border-ink/10 bg-white pl-11 pr-5 text-[14px] shadow-soft outline-none focus:border-shopee focus:ring-4 focus:ring-shopee-light transition-all"/>
               </div>
               {auth.role === 'owner' &&
-                <button onClick={onOpenAdmin} className="h-11 px-5 rounded-xl border border-slate-200/80 bg-white text-[13px] font-semibold text-ink-2 shadow-sm hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
+                <button onClick={onOpenAdmin} className="h-12 px-5 rounded-full border border-ink/10 bg-white text-[13px] font-semibold text-ink-2 shadow-soft hover:bg-canvas transition-colors inline-flex items-center gap-2 justify-center">
                   <IconSettings size={16}/> Access Control
                 </button>}
             </div>
@@ -474,9 +488,9 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
               {filtered.map(cat => (
                 <div key={cat.name}>
                   <div className="flex items-center gap-2.5 mb-4">
-                    <span className="w-1.5 h-4.5 rounded-sm bg-[#EE4D2D]"></span>
-                    <h3 className="font-extrabold text-[13.5px] tracking-wide uppercase text-ink">{cat.name}</h3>
-                    <span className="text-[10.5px] font-bold text-ink-3 bg-white border border-slate-200/80 rounded-full px-2.5 py-0.5">{cat.apps.length} Apps</span>
+                    <span className="w-1.5 h-5 rounded-sm bg-[#EE4D2D]"></span>
+                    <h3 className="font-extrabold text-[14px] tracking-wide uppercase text-ink">{cat.name}</h3>
+                    <span className="text-[11px] font-bold text-ink-3 bg-white border border-ink/10 rounded-full px-2.5 py-0.5">{cat.apps.length} Apps</span>
                   </div>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {cat.apps.map((a, ai) => {
@@ -486,28 +500,30 @@ function Dashboard({ auth, onLogin, onOpenAdmin }) {
                       return (
                         <div key={a.name} className="flex flex-col gap-1.5">
                           <Tag {...extraProps}
-                            className={`tilt-3d relative bg-white border border-slate-200/80 rounded-xl p-4 flex items-center gap-3.5 shadow-sm transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
+                            style={{ animationDelay: (ai * 0.35) + 's' }}
+                            className={`tilt-3d animate-float relative bg-white border border-ink/10 rounded-2xl p-5 flex items-center gap-4 shadow-soft transition-all ${hasLink ? 'hover:shadow-card hover:border-shopee/40 cursor-pointer' : 'opacity-60 cursor-not-allowed'}`}>
                             {hasLink
-                              ? <IconExternal size={15} className="absolute top-3.5 right-3.5 text-slate-400"/>
+                              ? <IconExternal size={16} className="absolute top-3.5 right-3.5 text-ink-4"/>
                               : <span 
-                                  className="absolute top-3 right-3 text-[9px] font-bold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded-full">Unlinked</span>}
+                                  style={{ backgroundColor: '#ffede7ff' }}
+                                  className="absolute top-3 right-3 text-[9px] font-extrabold uppercase text-slate-500 px-2 py-0.5 rounded-full">Unlinked</span>}
 
-                            {/* ICON IMAGE CONTAINER */}
-                            <div className="w-11 h-11 rounded-lg bg-canvas flex items-center justify-center shrink-0 border border-slate-100 p-2 shadow-inner">
+                            {/* 3D ICON IMAGE CONTAINER */}
+                            <div className="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center shrink-0 border border-black/5 p-2 shadow-inner">
                               <img src={a.img} className="w-full h-full object-contain" alt={a.name} />
                             </div>
 
                             <div className="min-w-0 pr-4 group/appdesc relative">
-                              <div className="font-bold text-[13.5px] text-ink truncate">{a.name}</div>
-                              <div className="text-[11px] text-ink-3 truncate cursor-help">{a.sub}</div>
-                              {/* Tooltip */}
+                              <div className="font-bold text-[14px] text-ink truncate">{a.name}</div>
+                              <div className="text-[11.5px] text-ink-3 truncate cursor-help">{a.sub}</div>
+                              {/* Tooltip: hiện full text mô tả khi hover, thay vì bị cắt bởi truncate */}
                               <div className="app-desc-tooltip">{a.sub}</div>
                             </div>
                           </Tag>
 
                           {a.guide &&
                             <a href={a.guide} target="_blank" rel="noopener"
-                              className="inline-flex items-center gap-1.5 self-start bg-white border border-slate-200/80 rounded-lg px-2.5 py-1 text-[10.5px] font-semibold text-ink-3 hover:text-shopee hover:border-shopee/30 hover:bg-shopee-light/50 transition-colors">
+                              className="inline-flex items-center gap-1.5 self-start bg-white border border-ink/10 rounded-lg px-2.5 py-1.5 text-[11px] font-semibold text-ink-3 hover:text-shopee hover:border-shopee/40 hover:bg-shopee-light transition-colors">
                               <IconBook size={12}/> User Guide
                             </a>}
                         </div>
@@ -529,23 +545,23 @@ function Testimonials() {
   return (
     <section id="testimonials" className="max-w-7xl mx-auto px-5 sm:px-8 py-20">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="inline-block text-[11px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-2">INTERNAL FEEDBACK</span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-ink">What our WFM team says</h2>
+        <span className="inline-block text-[12px] font-bold tracking-widest text-[#EE4D2D] uppercase mb-3">INTERNAL FEEDBACK</span>
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-ink">What our WFM team says</h2>
       </div>
       <div className="grid md:grid-cols-3 gap-6">
         {TESTIMONIALS.map((t, i) => (
-          <div key={i} className="bg-white border border-slate-200/80 rounded-2xl p-6.5 flex flex-col shadow-sm hover:shadow-card transition-all">
-            <div className="flex gap-1 mb-3.5">
-              {Array.from({length:5}).map((_,s) => <IconStar key={s} size={15} filled={s < t.rating} className={s < t.rating ? 'text-shopee' : 'text-slate-200'}/>)}
+          <div key={i} className="bg-white border border-ink/10 rounded-2xl p-7 flex flex-col">
+            <div className="flex gap-1 mb-4">
+              {Array.from({length:5}).map((_,s) => <IconStar key={s} size={16} filled={s < t.rating} className={s < t.rating ? 'text-shopee' : 'text-ink/15'}/>)}
             </div>
-            <p className="text-[13.5px] text-ink-2 leading-relaxed flex-1">"{t.quote}"</p>
-            <div className="flex items-center gap-3 mt-6 pt-4 border-t border-slate-100">
-              <div className="w-9 h-9 rounded-full bg-shopee-light text-shopee text-[11px] font-extrabold flex items-center justify-center">
+            <p className="text-[14px] text-ink-2 leading-relaxed flex-1">"{t.quote}"</p>
+            <div className="flex items-center gap-3 mt-6 pt-5 border-t border-ink/5">
+              <div className="w-10 h-10 rounded-full bg-shopee-light text-shopee text-[12px] font-extrabold flex items-center justify-center">
                 {t.name.split(' ').map(w=>w[0]).join('').toUpperCase()}
               </div>
               <div>
-                <div className="text-[13.5px] font-bold text-ink">{t.name}</div>
-                <div className="text-[11.5px] text-ink-3">{t.role}</div>
+                <div className="text-[14px] font-bold text-ink">{t.name}</div>
+                <div className="text-[12px] text-ink-3">{t.role}</div>
               </div>
             </div>
           </div>
@@ -559,21 +575,21 @@ function Testimonials() {
 function CTABanner({ onLogin }) {
   return (
     <section className="max-w-7xl mx-auto px-5 sm:px-8 pb-16">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#EE4D2D] via-[#E03A19] to-[#113366] px-8 py-14 text-center shadow-lifted">
+      <div className="relative overflow-hidden rounded-3xl bg-shopee px-8 py-16 text-center shadow-lifted">
         <div className="relative z-10 max-w-2xl mx-auto">
-          <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/10 text-white backdrop-blur border border-white/20">
-            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" className="w-9 h-9 object-contain" alt="Robot Icon" />
+          <div className="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 text-white backdrop-blur">
+            <img src="https://cdn-icons-png.flaticon.com/512/4712/4712035.png" className="w-10 h-10 object-contain" alt="Robot Icon" />
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight">
             Ready to optimize your WFM team operations?
           </h2>
-          <p className="mt-3 text-white/90 text-[14.5px] font-medium">
+          <p className="mt-4 text-white/95 text-[15px] font-medium">
             Sign in with your Shopee account to access all suite applications today.
           </p>
           <button onClick={onLogin}
-            style={{'--glow-color':'rgba(255,255,255,.4)', '--glow-color-end':'rgba(255,255,255,0)'}}
-            className="animate-pulse-glow mt-7 inline-flex items-center gap-2 bg-white text-shopee hover:bg-shopee-light font-extrabold text-[14.5px] px-7 py-3.5 rounded-xl shadow-card transition-all hover:-translate-y-0.5">
-            Get Started Now <IconArrowRight size={17}/>
+            style={{'--glow-color':'rgba(255,255,255,.55)', '--glow-color-end':'rgba(255,255,255,0)'}}
+            className="animate-pulse-glow mt-8 inline-flex items-center gap-2 bg-white text-shopee hover:bg-shopee-light font-extrabold text-[15px] px-8 py-4 rounded-xl shadow-card transition-all hover:-translate-y-0.5">
+            Get Started Now <IconArrowRight size={18}/>
           </button>
         </div>
       </div>
@@ -590,22 +606,22 @@ function Footer() {
   ];
   return (
     <footer className="bg-[#113366] text-white">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-14 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 py-16 grid sm:grid-cols-2 md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3 mb-4">
             <LogoHeader />
-            <span className="font-extrabold text-white text-[16px]">WFM Internal Tool</span>
+            <span className="font-extrabold text-white text-[17px]">WFM Internal Tool</span>
           </div>
-          <p className="text-[12.5px] text-white/70 leading-relaxed max-w-[240px]">
+          <p className="text-[13px] text-white/80 leading-relaxed max-w-[240px]">
             Shopee WFM AI Suite — Internal platform for scheduling, forecasting, and contact center operations monitoring.
           </p>
         </div>
         {cols.map(c => (
           <div key={c.title}>
-            <div className="text-slate-300 text-[11px] font-extrabold uppercase tracking-widest mb-3.5">{c.title}</div>
-            <div className="flex flex-col gap-2">
+            <div className="text-white text-[13px] font-extrabold uppercase tracking-wider mb-4 border-b border-white/20 pb-1 inline-block">{c.title}</div>
+            <div className="flex flex-col gap-2.5">
               {c.links.map(([label,href]) => (
-                <a key={label} href={href} className="text-[13px] text-white/70 hover:text-white transition-colors">
+                <a key={label} href={href} className="text-[13.5px] text-white/80 hover:text-shopee transition-all">
                   {label}
                 </a>
               ))}
@@ -613,10 +629,10 @@ function Footer() {
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10 py-5 bg-black/10">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px]">
-          <span className="text-white/60">© {new Date().getFullYear()} Shopee. Internal tool — restricted to corporate use.</span>
-          <span className="text-white/60 font-mono">wfm-internal-tool.onrender.com</span>
+      <div className="border-t border-white/10 py-6 bg-black/10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px]">
+          <span className="text-white/70">© {new Date().getFullYear()} Shopee. Internal tool — restricted to corporate use.</span>
+          <span className="text-white/70 font-mono font-bold">wfm-internal-tool.onrender.com</span>
         </div>
       </div>
     </footer>
@@ -643,30 +659,30 @@ function AdminModal({ onClose }) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={onClose}></div>
-      <div className="relative bg-white rounded-2xl w-full max-w-md max-h-[82vh] overflow-y-auto shadow-lifted border border-slate-200">
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-          <h3 className="font-extrabold text-[15px] text-ink">Access Control Management</h3>
+      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose}></div>
+      <div className="relative bg-white rounded-2xl w-full max-w-md max-h-[82vh] overflow-y-auto shadow-lifted">
+        <div className="flex items-center justify-between px-6 py-4.5 border-b border-ink/10">
+          <h3 className="font-extrabold text-[16px] text-ink">Access Control Management</h3>
           <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-canvas text-ink-3"><IconX size={18}/></button>
         </div>
         <div className="p-6">
           {loading ? <div className="text-center text-[13px] text-ink-3 py-8">Loading data...</div> : (
             <>
-              <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-ink-3 mb-2.5">Pending Requests</div>
+              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mb-2.5">Pending Requests</div>
               {pending.length === 0 && <div className="text-[12.5px] text-ink-4 mb-5">No pending requests.</div>}
               {pending.map(e => (
-                <div key={e} className="flex items-center gap-2 bg-canvas border border-slate-200/80 rounded-lg px-3 py-2 mb-2 text-[12.5px]">
+                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>approve(e)} className="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-md">Approve</button>
-                  <button onClick={()=>deny(e)} className="border border-slate-200 text-ink-3 text-[11px] font-bold px-3 py-1 rounded-md">Reject</button>
+                  <button onClick={()=>approve(e)} className="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-md">Approve</button>
+                  <button onClick={()=>deny(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Reject</button>
                 </div>
               ))}
-              <div className="text-[10.5px] font-extrabold uppercase tracking-wider text-ink-3 mt-6 mb-2.5">Authorized Members</div>
+              <div className="text-[11px] font-extrabold uppercase tracking-wider text-ink-3 mt-6 mb-2.5">Authorized Members</div>
               {members.length === 0 && <div className="text-[12.5px] text-ink-4">No active members found.</div>}
               {members.map(e => (
-                <div key={e} className="flex items-center gap-2 bg-canvas border border-slate-200/80 rounded-lg px-3 py-2 mb-2 text-[12.5px]">
+                <div key={e} className="flex items-center gap-2 bg-canvas border border-ink/10 rounded-lg px-3 py-2.5 mb-2 text-[13px]">
                   <span className="flex-1 text-ink-2 truncate">{e}</span>
-                  <button onClick={()=>removeMember(e)} className="border border-slate-200 text-ink-3 text-[11px] font-bold px-3 py-1 rounded-md">Revoke Access</button>
+                  <button onClick={()=>removeMember(e)} className="border border-ink/10 text-ink-3 text-[11px] font-bold px-3 py-1.5 rounded-md">Revoke Access</button>
                 </div>
               ))}
             </>
@@ -722,16 +738,18 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 
-<!-- ═══════════════════════════ EFFECTS: Parallax · Tilt ═══════════════════════════ -->
+<!-- ═══════════════════════════ EFFECTS: Custom Cursor · Parallax · 3D Tilt ═══════════════════════════
+     Script thuần JS, tách biệt hoàn toàn khỏi cây React ở trên — chỉ thêm hiệu ứng UI,
+     không đụng tới bất kỳ state/logic/API call nào của ứng dụng gốc. -->
 <script>
 (function(){
-  // ── Parallax cho lớp nền Hero ──
+  // ── Parallax cho lớp nền Hero khi cuộn trang ──
   var parallaxTicking = false;
   function updateParallax(){
     var layer = document.getElementById('parallaxLayer');
     if (layer) {
       var y = window.scrollY || 0;
-      layer.style.transform = 'translateY(' + (y * 0.2) + 'px)';
+      layer.style.transform = 'translateY(' + (y * 0.25) + 'px)';
     }
     parallaxTicking = false;
   }
@@ -739,16 +757,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
     if (!parallaxTicking) { requestAnimationFrame(updateParallax); parallaxTicking = true; }
   }, { passive: true });
 
-  // ── Mouse hover elevation nhẹ ──
+  // ── 3D tilt hover cho mọi phần tử .tilt-3d (delegate vì React render động) ──
   document.addEventListener('mousemove', function(e){
     var card = e.target.closest && e.target.closest('.tilt-3d');
     if (!card) return;
     var r = card.getBoundingClientRect();
     var px = (e.clientX - r.left) / r.width;
     var py = (e.clientY - r.top) / r.height;
-    var rx = (0.5 - py) * 4;
-    var ry = (px - 0.5) * 4;
-    card.style.transform = 'perspective(1000px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-2px)';
+    var rx = (0.5 - py) * 8;
+    var ry = (px - 0.5) * 8;
+    card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-3px)';
   });
   document.addEventListener('mouseout', function(e){
     var card = e.target.closest && e.target.closest('.tilt-3d');
